@@ -13,7 +13,7 @@ export const development = false;
 
 export const redirectURL = development
   ? "http://localhost:3001/"
-  : "https://thought-org.vercel.app/";
+  : "https://thot-org.vercel.app/";
 
 export const baseURL = "https://thorgapi.herokuapp.com";
 
