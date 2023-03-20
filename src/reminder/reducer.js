@@ -6,6 +6,7 @@ const initialState = {
   showFull: false,
   showDash: false,
   reminderToggle: false,
+  dropTrigger: false,
   reminders: [],
   wrapperSize: {},
   contSize: {},
@@ -76,7 +77,10 @@ export default function reminderReducer(state = initialState, action) {
     case SET_REMINDER_TOGGLE: {
       return { ...state, reminderToggle: !action.reminderToggle };
     }
-    // fuck
+    // dropTrigger
+    case SET_DROP_TRIGGER: {
+      return { ...state, dropTrigger: action.payload };
+    }
 
     // reminders
     case REMINDER_GET: {
@@ -135,6 +139,7 @@ export const CHECKED_RESET = "checked/checkedReset";
 export const SET_SHOW_DASH = "showFull/setShowFull";
 export const SET_SHOW_FULL = "showFull/setShowFull";
 export const SET_REMINDER_TOGGLE = "reminderToggle/setReminderToggle";
+export const SET_DROP_TRIGGER = "dropTrigger/setDropTrigger";
 export const REMINDER_GET = "reminder/reminderGet";
 export const REMINDER_POST = "reminder/reminderPost";
 export const REMINDER_PUT = "reminder/reminderPut";

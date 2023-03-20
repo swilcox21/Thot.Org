@@ -6,6 +6,7 @@ import {
   REMINDER_POST,
   REMINDER_DELETE,
   SET_EDIT_TEXT,
+  SET_DROP_TRIGGER,
 } from "../reminder/reducer";
 
 export async function refreshAccessToken(dispatch) {
@@ -53,9 +54,9 @@ export function getReminders(dispatch) {
   });
 }
 
-export function postReminder(dispatch, data) {
+export function postReminder(dispatch, text) {
   dispatch({ type: LOADING });
-
+  const data = [{ text: text }];
   async function reminderPost(data) {
     await axios
       .post(`${baseURL}/reminder/`, data, {
@@ -121,10 +122,14 @@ export function deleteReminder(dispatch, reminder_id) {
       .then((response) => {
         // window.location.reload();
         console.log(reminder_id);
-        dispatch({
-          type: REMINDER_DELETE,
-          payload: reminder_id,
-        });
+        getReminders(dispatch);
+        // dispatch({
+        //   type: REMINDER_DELETE,
+        //   payload: reminder_id,
+        // });
+      })
+      .then((response) => {
+        dispatch({ type: SET_DROP_TRIGGER, payload: true });
       });
   }
   reminderDelete(reminder_id).catch((err) => {

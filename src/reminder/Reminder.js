@@ -7,6 +7,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { putReminder, deleteReminder } from "../actions/axios";
 import { SET_EDIT_TEXT } from "./reducer";
 import { store } from "..";
+import BasicModal from "../components/Modal";
 
 function Reminder(props) {
   const { editText, showFull } = props.state;
@@ -138,12 +139,20 @@ function Reminder(props) {
               <div className="dropdown-item" href="#">
                 Another action
               </div>
-
+              <BasicModal
+                showButton={"X"}
+                header={null}
+                excerpt={`Are you sure you want to delete reminder #${props.reminder.id}`}
+                action={deleteReminder}
+                actionButton={"DELETE"}
+                dispatch={dispatch}
+                id={props.reminder.id}
+              />
               <button
                 type="button"
                 className="btn btn-primary"
                 data-toggle="modal"
-                onClick={() => setmodal(true)}
+                onClick={() => deleteReminder(dispatch, props.reminder.id)}
               >
                 X
               </button>

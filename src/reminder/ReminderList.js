@@ -12,6 +12,7 @@ import {
   SET_CHECKED,
   SET_SHOW_FULL,
   SET_REMINDER_TOGGLE,
+  SET_DROP_TRIGGER,
   SET_WRAP_POSITION,
   SET_CONT_POSITION,
   SET_FOOT_POSITION,
@@ -20,6 +21,7 @@ import {
 import { store } from "..";
 import { Link } from "react-router-dom";
 import Reminder from "./Reminder";
+import BasicModal from "../components/Modal";
 // REMINDERS
 
 function ReminderList(props) {
@@ -30,6 +32,7 @@ function ReminderList(props) {
     text,
     checked,
     reminderToggle,
+    dropTrigger,
     reminders,
     showDash,
     showFull,
@@ -41,8 +44,7 @@ function ReminderList(props) {
   //////// LOCAL STATE ////////
   const [droppable, setdroppable] = useState([]);
   const [newOrder, setnewOrder] = useState([]);
-  const [dropTrigger, setdropTrigger] = useState(false);
-  const [data, setdata] = useState([{ text: "" }]);
+  // const [dropTrigger, setdropTrigger] = useState(false);
 
   //////// USEREFS ////////
   const wrapperDivRef = useRef(null);
@@ -116,30 +118,31 @@ function ReminderList(props) {
   }, []);
 
   useEffect(() => {
-    console.log("REMINDERSSSSSS");
-    getRef.current = true;
     const dropArr = [];
-    reminders.map((rem) => dropArr.push(rem.order));
+    console.log("adsgdsgd");
+    reminders.length > 0 &&
+      reminders.map((rem) => dropArr.push(reminders.indexOf(rem) + 1));
     setdroppable(dropArr);
   }, [reminders]);
 
   useEffect(() => {
-    console.log("DROPTRIGGER");
     const _newOrder = [];
     droppable.map((drop, index) =>
       reminders
-        .filter((reminder) => reminder.order === drop)
-        .map((reminder) =>
-          _newOrder.push({ id: reminder.id, order: index + 1 })
-        )
+        .filter((reminder) => reminders.indexOf(reminder) + 1 === drop)
+        .map((reminder) => {
+          console.log("DROPTRIGGER");
+          _newOrder.push({ id: reminder.id, order: index + 1 });
+        })
     );
-    dropTrigger && setnewOrder(_newOrder);
-  }, [dropTrigger]);
+    setnewOrder(_newOrder);
+  }, [reminders, droppable]);
 
   useEffect(() => {
+    console.log("NEWORDER !dropTrigger");
     if (dropTrigger) {
       console.log("NEWORDER");
-      setdropTrigger(false);
+      dispatch({ type: SET_DROP_TRIGGER, payload: false });
       putReminder(dispatch, newOrder);
     }
   }, [newOrder]);
@@ -163,6 +166,8 @@ function ReminderList(props) {
     console.log("OVER: " + over.id);
 
     if (active.id !== over.id) {
+      dispatch({ type: SET_DROP_TRIGGER, payload: true });
+      // setTimeout(() => {
       setdroppable((items) => {
         const activeIndex = items.indexOf(active.id);
         const overIndex = items.indexOf(over.id);
@@ -171,8 +176,6 @@ function ReminderList(props) {
         console.log(arrayMove(items, activeIndex, overIndex));
         return arrayMove(items, activeIndex, overIndex);
       });
-      setdropTrigger(true);
-      // setTimeout(() => {
       // }, 1000);
     }
   }
@@ -190,16 +193,6 @@ function ReminderList(props) {
         >
           {showFull ? "shrink" : "grow"}
         </button>
-        {dashboard !== null && (
-          <button
-            style={{ margin: "auto", maxHeight: "40px" }}
-            onClick={() => {
-              dispatch({ type: DASHBOARD, dashboard: null });
-            }}
-          >
-            clearDash
-          </button>
-        )}
         {props.dashboard ? (
           <button className="addnewButton">
             <Link
@@ -210,15 +203,14 @@ function ReminderList(props) {
             </Link>
           </button>
         ) : (
-          <button className="addnewButton" onClick={() => newOrderFunc()}>
-            order
+          <button className="addnewButton">
+            <BasicModal
+              excerpt={"I LOVE YOU!"}
+              actionButton={"BABE"}
+              showButton={"BABE"}
+              action={() => alert("AND YOU'RE SUPER HOT")}
+            />
           </button>
-          // <Link
-          //   style={{ textDecoration: "none", color: "black" }}
-          //   to="/reminders/dashboard"
-          // >
-          //   {showDash ? "dash" : "board"}
-          // </Link>
         )}
       </div>
       <br />
@@ -258,12 +250,11 @@ function ReminderList(props) {
                 defaultValue={""}
                 value={text}
                 onChange={(e) => {
-                  setdata([{ text: e.target.value }]);
                   dispatch({ type: SET_TEXT, text: e.target.value });
                 }}
                 onBlur={() => {
                   console.log("i love you chritine");
-                  text !== "" && postReminder(dispatch, data);
+                  text !== "" && postReminder(dispatch, text);
                   dispatch({
                     type: SET_REMINDER_TOGGLE,
                     reminderToggle: reminderToggle,
@@ -275,7 +266,7 @@ function ReminderList(props) {
                 className="submitButton"
                 onClick={() => {
                   console.log("its a me MARIO");
-                  text === "" && postReminder(dispatch, data);
+                  text === "" && postReminder(dispatch, text);
                 }}
               >
                 +
