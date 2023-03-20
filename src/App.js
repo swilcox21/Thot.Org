@@ -36,8 +36,7 @@ function App(props) {
       (history.location.pathname !== "/login") ? (
         <TopNav {...props} />
       ) : null}
-      {props.state.app.sideNav && <SideNav {...props} />}
-      <Router {...props} />
+      {props.state.app.sideNav ? <SideNav {...props} /> : <Router {...props} />}
     </BrowserRouter>
   );
 }

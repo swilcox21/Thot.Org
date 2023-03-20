@@ -230,7 +230,7 @@ function ReminderList(props) {
                   text !== "" && postReminder(dispatch, text);
                   dispatch({
                     type: SET_REMINDER_TOGGLE,
-                    reminderToggle: reminderToggle,
+                    reminderToggle: false,
                   });
                 }}
                 autoFocus
@@ -259,7 +259,7 @@ function ReminderList(props) {
               onClick={() =>
                 dispatch({
                   type: SET_REMINDER_TOGGLE,
-                  reminderToggle: reminderToggle,
+                  reminderToggle: true,
                 })
               }
               style={{ height: "100vh" }}

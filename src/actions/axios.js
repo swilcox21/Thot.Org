@@ -1,6 +1,8 @@
 import axios from "axios";
 import { baseURL, redirectURL } from "..";
 import { LOADING } from "../reducer";
+import { THORG_POST } from "../reminder/reducer";
+import { THORG_GET } from "../reminder/reducer";
 import {
   REMINDER_GET,
   REMINDER_POST,
@@ -135,6 +137,119 @@ export function deleteReminder(dispatch, reminder_id) {
   reminderDelete(reminder_id).catch((err) => {
     refreshAccessToken().then(() => {
       reminderDelete(reminder_id).catch((err) => {
+        alert("invalid DELETE request");
+        console.log(err);
+      });
+    });
+  });
+}
+
+export function getThorgs(dispatch) {
+  dispatch({ type: LOADING });
+  async function thorgsGet() {
+    await axios
+      .get(`${baseURL}/groop/`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("THE GET:", response.data);
+        dispatch({
+          type: THORG_GET,
+          thorgs: response.data,
+        });
+        return;
+      });
+  }
+  thorgsGet().catch((err) => {
+    refreshAccessToken(dispatch).then(() => {
+      thorgsGet();
+    });
+  });
+}
+
+export function postThorg(dispatch, name) {
+  dispatch({ type: LOADING });
+  const data = [{ name: name }];
+  async function thorgPost(data) {
+    await axios
+      .post(`${baseURL}/groop/`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("THE POST:", response.data);
+        dispatch({
+          type: THORG_POST,
+          payload: response.data,
+        });
+      });
+  }
+  thorgPost(data).catch((err) => {
+    console.log(err);
+    refreshAccessToken(dispatch).then(() => {
+      thorgPost(data).catch((err) => {
+        alert("invalid POST request");
+        console.log(err);
+      });
+    });
+  });
+}
+
+export function putThorg(dispatch, data) {
+  dispatch({ type: LOADING });
+  async function thorgPut(data) {
+    await axios
+      .put(`${baseURL}/groop/`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        getThorgs(dispatch);
+        dispatch({ type: SET_EDIT_TEXT, editText: "" });
+      });
+  }
+  thorgPut(data).catch((err) => {
+    console.log(err);
+    refreshAccessToken(dispatch).then(() => {
+      thorgPut(data).catch((err) => {
+        alert("invalid PUT request");
+        console.log(err);
+      });
+    });
+  });
+}
+
+export function deleteThorg(dispatch, thorg_id) {
+  dispatch({ type: LOADING });
+  async function thorgDelete(thorg_id) {
+    console.log("DELETE: ", thorg_id);
+    await axios
+      .delete(`${baseURL}/thorg/` + thorg_id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        // window.location.reload();
+        console.log(thorg_id);
+        getThorgs(dispatch);
+        // dispatch({
+        //   type: THORG_DELETE,
+        //   payload: thorg_id,
+        // });
+      })
+      .then((response) => {
+        dispatch({ type: SET_DROP_TRIGGER, payload: true });
+      });
+  }
+  thorgDelete(thorg_id).catch((err) => {
+    refreshAccessToken().then(() => {
+      thorgDelete(thorg_id).catch((err) => {
         alert("invalid DELETE request");
         console.log(err);
       });
