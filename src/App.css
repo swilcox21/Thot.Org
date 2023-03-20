@@ -1,38 +1,261 @@
 .App {
+  min-height: 100vh;
+}
+
+.loadBar {
+  position: fixed;
+  z-index: 100;
+  background-color: lightblue;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+.hide {
+  display: none;
+}
+.middle {
+  /* float: center; */
+  position: relative;
+  z-index: 100;
+}
+/* loginButton*/
+.loginButton {
+  margin: auto;
+  max-width: fit-content;
+}
+.loginContainer {
+  background-color: whitesmoke;
+  min-height: 100vh;
+  min-width: 100%;
+  margin-top: 0;
+  position: fixed;
+}
+.loginCard {
+  text-align: center;
+  width: 30vh;
+  padding-top: 8vh;
+  padding-bottom: 10vh;
+  border: 2px solid gray;
+  border-radius: 50px;
+  margin: auto;
+  background-color: white;
+  margin-top: 25vh;
+}
+/* logoutButton */
+.logoutButton {
+  margin: 4%;
+  width: 80px;
+  min-height: 60px;
+}
+.remindersButton {
+  margin: 4%;
+  width: 80px;
+}
+.thotsButtton {
+  margin: 4%;
+  width: 80px;
+  min-height: 60px;
+}
+.front {
+  position: relative;
+  z-index: 100;
+}
+/* REMINDERS STYLES */
+.addnewButton {
+  margin: 5%;
+  float: left;
+  width: 80px;
+}
+.phantomCheckbox {
+  position: relative;
+  opacity: 80%;
+}
+.remindersContainer {
+  width: 60%;
+  margin: auto;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dashButton {
+  margin-right: 5px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.reminder {
+  margin: auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.reminderWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+.reminderTextAreaShow {
+  height: fit-content;
+}
+.reminderTextArea {
+  max-height: 34px;
+  overflow: hidden;
+}
+.reminderTextArea:focus {
+  max-height: fit-content;
+  min-height: 34px;
+}
+.thotsHeader {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.reminderToggle {
+  width: 100%;
+  border: 1px dotted black;
+}
+.subNavHeader {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+.thotToggle {
+  margin-top: -100px;
+  text-align: middle;
   color: white;
+  /* text-align: left; */
+  cursor: pointer;
+  font-size: 29px;
+}
+@media (max-width: 1000px) {
+  .remindersContainer {
+    width: 600px;
+  }
+}
+@media (max-width: 650px) {
+  .remindersContainer {
+    width: 100%;
+  }
 }
 
-.App-link {
-  color: #61dafb;
+/* border styles */
+.borderNone {
+  border: none;
+}
+.borderRight {
+  border: none;
+  border-right: 1px dotted;
+}
+.borderBottom {
+  border: none;
+  border-bottom: 1px dotted;
+}
+.borderBottomRight {
+  border: none;
+  border-bottom: 1px dotted;
+  border-right: 1px dotted;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Custom Navbar  */
+.closed {
+  position: fixed;
+  border-bottom: 1px solid black;
+  min-width: 100%;
+  z-index: 2;
+  background-color: rgb(152, 160, 169);
+}
+.open {
+  position: fixed;
+  border-bottom: 1px solid black;
+  min-width: 100%;
+  z-index: 2;
+  background-color: rgb(152, 160, 169);
+}
+
+/* dashBoard */
+.dashBoardFolder {
+  margin-left: 5vh;
+}
+
+/* sideNav */
+.sideNav {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  background: rgb(41, 171, 226);
+  background: linear-gradient(
+    90deg,
+    rgba(41, 171, 226, 1) 0%,
+    rgba(127, 201, 237, 0.7) 100%
+  );
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 2;
+}
+.sideNavSmall {
+  height: 100vh;
+  width: 80%;
+  margin-top: -70px;
+  padding-top: 70px;
+  position: fixed;
+  background: rgb(41, 171, 226);
+  background: linear-gradient(
+    90deg,
+    rgba(41, 171, 226, 1) 0%,
+    rgba(127, 201, 237, 0.7) 100%
+  );
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 2;
+}
+.sideNavClosed {
+  position: fixed;
+  z-index: 2;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 0.5em;
+}
+.scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+/* thought */
+.activeTodo:focus {
+  min-height: 130px;
+  overflow: scroll;
+}
+.activeTodo {
+  max-height: 50px;
+  min-height: 50px;
+  overflow: hidden;
+}
+
+.footer {
+  width: 100%;
+  height: 30px;
+  background-color: rgb(82, 82, 82);
+  position: fixed;
+  bottom: 0;
+  color: white;
+  text-align: center;
+}
+.showNav {
+  background-color: gray;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding: 3% 6% 3% 6%;
+  background-color: rgb(85, 85, 85);
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+.hideNav {
+  position: fixed;
+  height: 30px;
+  z-index: 80;
+  background-color: gray;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+.navCardContainer {
+  width: 100%;
 }
