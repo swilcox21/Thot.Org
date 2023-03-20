@@ -10,15 +10,13 @@ import reminder from "./reminder/reducer";
 // import thot from "./thots/thotReducer";
 
 export const development = false;
-
 export const redirectURL = development
   ? "http://localhost:3001/"
   : "https://thot-org.vercel.app/";
-
 export const baseURL = "https://thorgapi.herokuapp.com";
-
 export const history = createBrowserHistory();
 
+//////// STORE ////////
 export const store = configureStore({
   reducer: combineReducers({
     app,
@@ -31,7 +29,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <App />
+    <App history={history} redirectURL={redirectURL} />
   </Provider>
   // </React.StrictMode>
 );

@@ -73,6 +73,7 @@
 .remindersContainer {
   width: 60%;
   margin: auto;
+  margin-top: 10%;
   text-align: center;
 }
 .dashButton {
@@ -128,7 +129,7 @@
 }
 @media (max-width: 650px) {
   .remindersContainer {
-    width: 100%;
+    width: 99%;
   }
 }
 
@@ -172,40 +173,7 @@
 }
 
 /* sideNav */
-.sideNav {
-  height: 100%;
-  width: 20%;
-  position: fixed;
-  background: rgb(41, 171, 226);
-  background: linear-gradient(
-    90deg,
-    rgba(41, 171, 226, 1) 0%,
-    rgba(127, 201, 237, 0.7) 100%
-  );
-  overflow-x: hidden;
-  overflow-y: scroll;
-  z-index: 2;
-}
-.sideNavSmall {
-  height: 100vh;
-  width: 80%;
-  margin-top: -70px;
-  padding-top: 70px;
-  position: fixed;
-  background: rgb(41, 171, 226);
-  background: linear-gradient(
-    90deg,
-    rgba(41, 171, 226, 1) 0%,
-    rgba(127, 201, 237, 0.7) 100%
-  );
-  overflow-x: hidden;
-  overflow-y: scroll;
-  z-index: 2;
-}
-.sideNavClosed {
-  position: fixed;
-  z-index: 2;
-}
+
 .scrollbar::-webkit-scrollbar {
   width: 0.5em;
 }

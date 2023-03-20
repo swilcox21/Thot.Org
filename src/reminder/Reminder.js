@@ -5,7 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import React, { useEffect, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { putReminder, deleteReminder } from "../actions/axios";
-import { SET_EDIT_TEXT } from "./reducer";
+import { SET_EDIT_TEXT, SET_SHOW_FULL } from "./reducer";
 import { store } from "..";
 import BasicModal from "../components/Modal";
 
@@ -27,55 +27,6 @@ function Reminder(props) {
 
   return (
     <>
-      {modal && (
-        <div
-          className="container-fluid"
-          style={{
-            float: "top",
-            margin: "auto",
-            zIndex: 900,
-            height: "100vh",
-            backgroundColor: "rgba(137, 137, 137, 0.337)",
-          }}
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  D
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">...</div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Cancel
-                </button>
-
-                <button
-                  className="submitButton"
-                  onClick={() => {
-                    deleteReminder(dispatch, props.reminder.id);
-                  }}
-                >
-                  X
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
       <div className="reminder" ref={setNodeRef} style={style}>
         <div
           {...attributes}
@@ -93,8 +44,8 @@ function Reminder(props) {
         <TextareaAutosize
           className={
             showFull
-              ? "col-9 borderBottom reminderTextAreaShow mx-3 py-1 pl-2"
-              : "col-9 borderBottom reminderTextArea mx-3 py-1 pl-2"
+              ? "col-8 borderBottom reminderTextAreaShow mx-3 py-1 pl-2"
+              : "col-8 borderBottom reminderTextArea mx-3 py-1 pl-2"
           }
           type="text"
           defaultValue={props.reminder.text}
@@ -133,11 +84,14 @@ function Reminder(props) {
               }}
               href="#"
             >
-              <div className="dropdown-item" href="#">
-                Action
-              </div>
-              <div className="dropdown-item" href="#">
-                Another action
+              <div
+                className="dropdown-item addnewButton"
+                onClick={() => {
+                  dispatch({ type: SET_SHOW_FULL, showFull: showFull });
+                }}
+                href="#"
+              >
+                {showFull ? "shrink" : "grow"}
               </div>
               <BasicModal
                 showButton={"X"}
@@ -148,14 +102,14 @@ function Reminder(props) {
                 dispatch={dispatch}
                 id={props.reminder.id}
               />
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-primary"
                 data-toggle="modal"
                 onClick={() => deleteReminder(dispatch, props.reminder.id)}
               >
                 X
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

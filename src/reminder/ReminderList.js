@@ -72,7 +72,7 @@ function ReminderList(props) {
     if (containerDivRef.current) {
       const xPos = containerDivRef.current.offsetLeft + window.scrollX;
       const yPos = containerDivRef.current.offsetTop + window.scrollY;
-      console.log("CONTAIN", { wdidth: xPos, hieght: yPos });
+      console.log("CONTAIN", { width: xPos, height: yPos });
 
       dispatch({
         type: SET_CONT_POSITION,
@@ -183,36 +183,9 @@ function ReminderList(props) {
   return (
     <div ref={wrapperDivRef} className="reminderWrapper">
       {loading && <div className="loadBar">I LOVE CHRISTINE</div>}
-
-      <div className="subNavHeader">
-        <button
-          className="addnewButton"
-          onClick={() => {
-            dispatch({ type: SET_SHOW_FULL, showFull: showFull });
-          }}
-        >
-          {showFull ? "shrink" : "grow"}
-        </button>
-        {props.dashboard ? (
-          <button className="addnewButton">
-            <Link
-              style={{ textDecoration: "none", color: "black" }}
-              to="/reminders"
-            >
-              {showDash ? "dash" : "board"}
-            </Link>
-          </button>
-        ) : (
-          <button className="addnewButton">
-            <BasicModal
-              excerpt={"I LOVE YOU!"}
-              actionButton={"BABE"}
-              showButton={"BABE"}
-              action={() => alert("AND YOU'RE SUPER HOT")}
-            />
-          </button>
-        )}
-      </div>
+      <br />
+      <br />
+      <br />
       <br />
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
         <div ref={containerDivRef} className="remindersContainer">

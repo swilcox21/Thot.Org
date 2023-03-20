@@ -1,6 +1,6 @@
 const initialState = {
   loading: false,
-  showNav: false,
+  sideNav: false,
   touchPosition: null,
   touchStopPosition: null,
 };
@@ -16,13 +16,13 @@ export default function appReducer(state = initialState, action) {
     case SHOW_NAV: {
       return {
         ...state,
-        showNav: !action.showNav,
+        sideNav: true,
       };
     }
-    case SET_NAV: {
+    case HIDE_NAV: {
       return {
         ...state,
-        nav: action.nav,
+        sideNav: false,
       };
     }
     case SET_TOUCH_POSITION: {
@@ -45,7 +45,7 @@ export default function appReducer(state = initialState, action) {
 
 export const LOADING = "loading/setLoading";
 export const SHOW_NAV = "showNav/setShowNav";
-export const SET_NAV = "nav/setNav";
+export const HIDE_NAV = "hideNav/setShowNav";
 export const SET_TOUCH_POSITION = "touchPosition/setTouchPosition";
 export const SET_TOUCH_STOP_POSITION = "touchStopPosition/setTouchStopPosition";
 
