@@ -9,7 +9,7 @@ import reminder from "./reminder/reducer";
 // import thot from "./thots/thotReducer";
 import { createBrowserHistory } from "history";
 
-export const development = true;
+export const development = false;
 
 export const redirectURL = development
   ? "http://localhost:3001/"
