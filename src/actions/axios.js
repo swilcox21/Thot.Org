@@ -228,7 +228,7 @@ export function deleteThorg(dispatch, thorg_id) {
   async function thorgDelete(thorg_id) {
     console.log("DELETE: ", thorg_id);
     await axios
-      .delete(`${baseURL}/thorg/` + thorg_id, {
+      .delete(`${baseURL}/groop/` + thorg_id, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
           "Content-Type": "application/json",
@@ -250,6 +250,99 @@ export function deleteThorg(dispatch, thorg_id) {
   thorgDelete(thorg_id).catch((err) => {
     refreshAccessToken().then(() => {
       thorgDelete(thorg_id).catch((err) => {
+        alert("invalid DELETE request");
+        console.log(err);
+      });
+    });
+  });
+}
+export function postThot(dispatch, name) {
+  dispatch({ type: LOADING });
+  const data = [{ name: name }];
+  async function thotPost(data) {
+    await axios
+      .post(`${baseURL}/thot/`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("THE POST:", response.data);
+        dispatch({
+          type: THORG_POST,
+          payload: response.data,
+        });
+      });
+  }
+  thotPost(data).catch((err) => {
+    console.log(err);
+    refreshAccessToken(dispatch).then(() => {
+      thotPost(data).catch((err) => {
+        alert("invalid POST request");
+        console.log(err);
+      });
+    });
+  });
+}
+
+export function putThot(dispatch, thot_id, text) {
+  dispatch({ type: LOADING });
+  const data = [
+    {
+      id: thot_id,
+      text: text,
+    },
+  ];
+  async function thotPut(data) {
+    await axios
+      .put(`${baseURL}/thot/`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        getThorgs(dispatch);
+        dispatch({ type: SET_EDIT_TEXT, editText: "" });
+      });
+  }
+  thotPut(data).catch((err) => {
+    console.log(err);
+    refreshAccessToken(dispatch).then(() => {
+      thotPut(data).catch((err) => {
+        alert("invalid PUT request");
+        console.log(err);
+      });
+    });
+  });
+}
+
+export function deleteThot(dispatch, thorg_id) {
+  dispatch({ type: LOADING });
+  async function thotDelete(thorg_id) {
+    console.log("DELETE: ", thorg_id);
+    await axios
+      .delete(`${baseURL}/thot/` + thorg_id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        // window.location.reload();
+        console.log(thorg_id);
+        getThorgs(dispatch);
+        // dispatch({
+        //   type: THORG_DELETE,
+        //   payload: thorg_id,
+        // });
+      })
+      .then((response) => {
+        dispatch({ type: SET_DROP_TRIGGER, payload: true });
+      });
+  }
+  thotDelete(thorg_id).catch((err) => {
+    refreshAccessToken().then(() => {
+      thotDelete(thorg_id).catch((err) => {
         alert("invalid DELETE request");
         console.log(err);
       });

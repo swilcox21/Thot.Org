@@ -7,11 +7,13 @@ import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import app from "./reducer";
 import reminder from "./reminder/reducer";
+import { RouterProvider } from "react-router-dom";
+import router from "./router/Router";
 // import thot from "./thots/thotReducer";
 
 export const development = false;
 export const redirectURL = development
-  ? "http://localhost:3001/"
+  ? "http://localhost:3000/"
   : "https://thot-org.vercel.app/";
 export const baseURL = "https://thorgapi.herokuapp.com";
 export const history = createBrowserHistory();
@@ -29,7 +31,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <App history={history} redirectURL={redirectURL} />
+    <App />
   </Provider>
   // </React.StrictMode>
 );

@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 function PageNotFound() {
   const loading = false;
+  useEffect(() => {
+    console.log(window.location.pathname);
+  }, []);
   return (
     <Routes>
       <Route
