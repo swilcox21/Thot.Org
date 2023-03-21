@@ -9,7 +9,7 @@ import app from "./reducer";
 import reminder from "./pages/reminder/reducer";
 // import thot from "./thots/thotReducer";
 
-export const development = true;
+export const development = false;
 export const redirectURL = development
   ? "http://localhost:3000/"
   : "https://thot-org.vercel.app/";
