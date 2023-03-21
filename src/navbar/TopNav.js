@@ -6,7 +6,7 @@ import { redirectURL, store } from "..";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import DropDown from "../components/DropDown";
-import { SET_REMINDER_TOGGLE } from "../reminder/reducer";
+import { SET_REMINDER_TOGGLE } from "../pages/reminder/reducer";
 
 function TopNav(props) {
   const dispatch = store.dispatch;

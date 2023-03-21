@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import "../App.css";
+import "../../App.css";
 import React, { useState } from "react";
 import axios from "axios";
-import { baseURL, redirectURL } from "..";
+import { baseURL, redirectURL } from "../..";
 // import GoogleLogin from "react-google-login";
 
 function Login() {

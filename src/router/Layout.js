@@ -9,8 +9,8 @@ import {
 import { store, redirectURL, history } from "..";
 import React, { useEffect, useState } from "react";
 import router from "../router/Router";
-import SideNav from "../router/SideNav";
-import TopNav from "../router/TopNav";
+import SideNav from "../navbar/SideNav";
+import TopNav from "../navbar/TopNav";
 import { connect } from "react-redux";
 import { HIDE_NAV, SHOW_NAV } from "../reducer";
 

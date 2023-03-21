@@ -1,15 +1,15 @@
 import axios from "axios";
 import { baseURL, redirectURL } from "..";
 import { LOADING } from "../reducer";
-import { THORG_POST } from "../reminder/reducer";
-import { THORG_GET } from "../reminder/reducer";
+import { THORG_POST } from "../pages/reminder/reducer";
+import { THORG_GET } from "../pages/reminder/reducer";
 import {
   REMINDER_GET,
   REMINDER_POST,
   REMINDER_DELETE,
   SET_EDIT_TEXT,
   SET_DROP_TRIGGER,
-} from "../reminder/reducer";
+} from "../pages/reminder/reducer";
 
 export async function refreshAccessToken(dispatch) {
   const body = { refresh: localStorage.getItem("refresh") };

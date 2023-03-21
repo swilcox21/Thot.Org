@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import "../App.css";
+import "../../App.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import React, { useEffect, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import { putReminder, deleteReminder, putThot } from "../actions/axios";
+import { putReminder, deleteReminder, putThot } from "../../actions/axios";
 import { SET_EDIT_TEXT, SET_SHOW_FULL } from "../reminder/reducer";
-import { store } from "..";
-import BasicModal from "../components/Modal";
+import { store } from "../..";
+import BasicModal from "../../components/Modal";
 import { connect } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import CodeMirror from "@uiw/react-codemirror";

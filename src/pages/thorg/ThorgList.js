@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import "../App.css";
+import "../../App.css";
 import { BrowserRouter } from "react-router-dom";
-import { store, redirectURL, history } from "..";
+import { store, redirectURL, history } from "../..";
 import React, { useEffect, useRef, useState } from "react";
-import { HIDE_NAV } from "../reducer";
+import { HIDE_NAV } from "../../reducer";
 import { SET_REMINDER_TOGGLE, SET_TEXT } from "../reminder/reducer";
-import { postReminder } from "../actions/axios";
+import { postReminder } from "../../actions/axios";
 import TextareaAutosize from "react-textarea-autosize";
 import { connect } from "react-redux";
-import { getThorgs } from "../actions/axios";
-import { postThorg } from "../actions/axios";
+import { getThorgs } from "../../actions/axios";
+import { postThorg } from "../../actions/axios";
 import Thorg from "./Thorg";
 
 function ThorgList(props) {
@@ -48,6 +48,7 @@ function ThorgList(props) {
               type="text"
               syle={{}}
               value={text}
+              autoFocus
               onChange={(e) => {
                 dispatch({ type: SET_TEXT, text: e.target.value });
               }}
@@ -68,7 +69,6 @@ function ThorgList(props) {
                 backgroundColor: "whitesmoke",
                 borderBottom: "1px solid gray",
               }}
-              autoFocus
             />
             <div
               style={{ height: "100vh" }}

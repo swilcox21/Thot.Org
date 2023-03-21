@@ -6,12 +6,10 @@ import { createBrowserHistory } from "history";
 import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import app from "./reducer";
-import reminder from "./reminder/reducer";
-import { RouterProvider } from "react-router-dom";
-import router from "./router/Router";
+import reminder from "./pages/reminder/reducer";
 // import thot from "./thots/thotReducer";
 
-export const development = false;
+export const development = true;
 export const redirectURL = development
   ? "http://localhost:3000/"
   : "https://thot-org.vercel.app/";

@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 // import PropTypes from "prop-types";
-import "../App.css";
+import "../../App.css";
 import React, { useEffect, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { closestCorners, DndContext } from "@dnd-kit/core";
 import { connect } from "react-redux";
-import { getReminders, postReminder, putReminder } from "../actions/axios";
+import { getReminders, postReminder, putReminder } from "../../actions/axios";
 import {
   SET_TEXT,
   SET_CHECKED,
@@ -18,10 +18,10 @@ import {
   SET_FOOT_POSITION,
   DASHBOARD,
 } from "./reducer";
-import { store } from "..";
+import { store } from "../..";
 import { Link } from "react-router-dom";
 import Reminder from "./Reminder";
-import BasicModal from "../components/Modal";
+import BasicModal from "../../components/Modal";
 // REMINDERS
 
 function ReminderList(props) {

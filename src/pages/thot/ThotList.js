@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import "../App.css";
+import "../../App.css";
 import React, { useEffect, useRef, useState } from "react";
-import { store } from "..";
+import { store } from "../..";
 import { connect } from "react-redux";
 import { useMatch, useParams } from "react-router-dom";
-import { getThorgs } from "../actions/axios";
+import { getThorgs } from "../../actions/axios";
 import Thot from "./Thot";
 
 function ThotList(props) {

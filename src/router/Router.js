@@ -7,15 +7,15 @@ import {
   useLoaderData,
   createRoutesFromElements,
 } from "react-router-dom";
-import Login from "../login/Login";
-import Reminders from "../reminder/ReminderList";
-import PageNotFound from "./PagenotFound";
-import Thorgs from "../thorg/ThorgList";
-import Thots from "../thorg/ThotList";
+import Login from "../pages/login/Login";
+import Reminders from "../pages/reminder/ReminderList";
+import PageNotFound from "../pages/pagenotfound/PagenotFound";
+import Thorgs from "../pages/thorg/ThorgList";
+import Thots from "../pages/thot/ThotList";
 import { connect } from "react-redux";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import TopNav from "./TopNav";
+import TopNav from "../navbar/TopNav";
 import Layout from "./Layout";
 import { store } from "..";
 import { getThorgs } from "../actions/axios";

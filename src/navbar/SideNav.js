@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store, redirectURL, history } from "..";
 import React, { useEffect, useRef, useState } from "react";
 import { HIDE_NAV } from "../reducer";
-import { SET_REMINDER_TOGGLE, SET_TEXT } from "../reminder/reducer";
+import { SET_REMINDER_TOGGLE, SET_TEXT } from "../pages/reminder/reducer";
 import { postReminder } from "../actions/axios";
 import TextareaAutosize from "react-textarea-autosize";
 import { connect } from "react-redux";

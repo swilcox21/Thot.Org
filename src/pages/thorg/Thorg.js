@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import "../App.css";
+import "../../App.css";
 import { BrowserRouter, useNavigate } from "react-router-dom";
-import { store, redirectURL, history } from "..";
+import { store, redirectURL, history } from "../..";
 import React, { useEffect, useRef, useState } from "react";
-import { HIDE_NAV } from "../reducer";
+import { HIDE_NAV } from "../../reducer";
 import { SET_REMINDER_TOGGLE, SET_TEXT } from "../reminder/reducer";
-import { postReminder } from "../actions/axios";
+import { postReminder } from "../../actions/axios";
 import TextareaAutosize from "react-textarea-autosize";
 import { connect } from "react-redux";
-import { getThorgs } from "../actions/axios";
-import { postThorg } from "../actions/axios";
+import { getThorgs } from "../../actions/axios";
+import { postThorg } from "../../actions/axios";
 
 function Thorg(props) {
   const dispatch = store.dispatch;
