@@ -144,7 +144,7 @@ function Reminder(props) {
               <BasicModal
                 showButton={"X"}
                 header={null}
-                excerpt={`Are you sure you want to delete reminder #${props.reminder.id}`}
+                excerpt={`Are you sure you want to delete reminder #${props.id}`}
                 action={deleteReminder}
                 actionButton={"DELETE"}
                 dispatch={dispatch}
