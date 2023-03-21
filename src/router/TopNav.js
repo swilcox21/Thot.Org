@@ -101,10 +101,13 @@ function TopNav(props) {
           onClick={() => navigate("/thorgs")}
           style={{
             position: "fixed",
-            margin: "5%",
-            marginTop: 100,
+            zIndex: 999,
+            marginTop: 91,
             fontSize: "28px",
             color: "rgb(85, 85, 85)",
+            marginLeft: "4%",
+            padding: "10px",
+            backgroundColor: "white",
           }}
         >
           <i className="fa fa-arrow-left" aria-hidden="true"></i>

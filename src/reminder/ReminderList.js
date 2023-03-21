@@ -207,17 +207,17 @@ function ReminderList(props) {
           {/* NEW REMINDER */}
           {reminderToggle ? (
             <div>
-              <input
+              {/* <input
                 className="phantomCheckbox"
                 type="checkbox"
                 checked={checked}
                 onChange={() =>
                   dispatch({ type: SET_CHECKED, checked: checked })
                 }
-              />
+              /> */}
               <TextareaAutosize
                 ref={inputRef}
-                className="col-9 borderBottom mx-3 py-1 pl-2"
+                className="col-8 borderBottom mx-3 my-2 py-1 pl-2"
                 placeholder="Add new Reminder here..."
                 type="text"
                 defaultValue={""}
@@ -234,8 +234,9 @@ function ReminderList(props) {
                   });
                 }}
                 autoFocus
+                style={{ textAlign: "center" }}
               />
-              <button
+              {/* <button
                 className="submitButton"
                 onClick={() => {
                   console.log("its a me MARIO");
@@ -243,7 +244,7 @@ function ReminderList(props) {
                 }}
               >
                 +
-              </button>
+              </button> */}
               <div
                 style={{ height: "100vh" }}
                 onClick={() =>

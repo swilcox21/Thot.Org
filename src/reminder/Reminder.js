@@ -49,7 +49,7 @@ function Reminder(props) {
             padding: "5px",
             paddingLeft: "7px",
             paddingRight: "7px",
-            marginRight: `${showFull ? "-15px" : "-35px"}`,
+            // marginRight: `${showFull ? "-15px" : "-35px"}`,
           }}
         >
           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
@@ -57,9 +57,9 @@ function Reminder(props) {
           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>&nbsp;
           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
         </div>
-        <div className="col-9">
+        {/* <div className="col-9">
           <CodeMirror
-            height={showFull ? "auto" : "30px"}
+            height={showFull ? "auto" : "25px"}
             value={props.reminder.text}
             extensions={[javascript({ jsx: true })]}
             onChange={onChange}
@@ -73,8 +73,8 @@ function Reminder(props) {
               setEditText("");
             }}
           />
-        </div>
-        {/* <TextareaAutosize
+        </div> */}
+        <TextareaAutosize
           className={
             showFull
               ? "col-8 borderBottom reminderTextAreaShow mx-3 py-1 pl-2"
@@ -95,7 +95,8 @@ function Reminder(props) {
               ]);
             dispatch({ type: SET_EDIT_TEXT, editText: "" });
           }}
-        /> */}
+          style={{ textAlign: "center" }}
+        />
         {/* DROP DOWN */}
         <div
           className="dropdown dropleft"

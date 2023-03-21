@@ -29,7 +29,7 @@ function Thot(props) {
     <>
       <div
         style={{
-          width: "90%",
+          width: "100%",
           padding: "15px",
           margin: "auto",
         }}
@@ -37,7 +37,7 @@ function Thot(props) {
         <CodeMirror
           theme="light"
           value={props.thot.text}
-          height={showFull ? "300px" : "70px"}
+          height="auto"
           extensions={[javascript({ jsx: true })]}
           onChange={onChange}
           onFocus={() => setShowFull(true)}
