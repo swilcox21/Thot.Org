@@ -77,14 +77,7 @@ function Reminder(props) {
           style={{ textAlign: "center" }}
         />
         {/* DROP DOWN */}
-        <div
-          className="dropdown dropleft"
-          style={
-            {
-              // marginLeft: `${showFull && "-35px"}`,
-            }
-          }
-        >
+        <div className="dropdown dropleft">
           <div
             data-toggle="dropdown"
             aria-haspopup="true"
