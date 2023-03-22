@@ -12,7 +12,7 @@ import reminder from "./pages/reminder/reducer";
 export const development = false;
 export const redirectURL = development
   ? "http://localhost:3000/"
-  : "https://thot-org.vercel.app/";
+  : "https://thotorg.app/";
 export const baseURL = "https://thorgapi.herokuapp.com";
 export const history = createBrowserHistory();
 
