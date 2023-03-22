@@ -23,18 +23,16 @@ function Layout(props) {
   console.log(state);
 
   useEffect(() => {
-    // window.scrollY = 0;
-    window.scrollTo(0, 0);
-    // var scroll = window.scrollY;
-    // const handleScroll = (event) => {
-    //   scroll > window.scrollY ? setShowNav(true) : setShowNav(false);
-    //   scroll = window.scrollY;
-    // };
-    // window.addEventListener("scroll", handleScroll);
+    var scroll = window.scrollY;
+    const handleScroll = (event) => {
+      scroll > window.scrollY ? setShowNav(true) : setShowNav(false);
+      scroll = window.scrollY;
+    };
+    window.addEventListener("scroll", handleScroll);
 
-    // return () => {
-    //   window.removeEventListener("scroll", handleScroll);
-    // };
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
