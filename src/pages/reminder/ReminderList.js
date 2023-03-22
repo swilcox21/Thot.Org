@@ -61,7 +61,6 @@ function ReminderList(props) {
     console.log("INITIAL");
     getReminders(dispatch);
     getRef.current = true;
-    window.scrollTo(0, 0);
     return () => {};
   }, []);
 
