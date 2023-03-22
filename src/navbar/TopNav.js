@@ -37,7 +37,7 @@ function TopNav(props) {
 
   return (
     <>
-      {/* {props.showNav && (
+      {props.showNav && (
         <div
           style={{
             width: "100%",
@@ -97,7 +97,7 @@ function TopNav(props) {
             dropStyle={{ minWidth: "50px", padding: 0, marginRight: "15px" }}
           />
         </div>
-      )} */}
+      )}
 
       {/* SHOWNAV */}
       <div
