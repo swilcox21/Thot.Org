@@ -76,13 +76,12 @@ function Reminder(props) {
             showFull
               ? {
                   textAlign: "center",
-                  maxHeight: "fit-content",
-                  minHeight: "36px",
+                  minHeight: "29px",
                 }
               : {
                   textAlign: "center",
                   overflow: "hidden",
-                  maxHeight: "36px",
+                  maxHeight: "29px",
                 }
           }
         />
