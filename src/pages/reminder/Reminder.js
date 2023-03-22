@@ -16,6 +16,7 @@ function Reminder(props) {
   //////// STATE ///////
   const [editText, setEditText] = useState("");
   const [showFull, setShowFull] = useState(false);
+  const [showFullHold, setShowFullHold] = useState(false);
 
   const [data, setdata] = useState([{ text: "" }]);
   const [modal, setmodal] = useState(false);
@@ -73,10 +74,10 @@ function Reminder(props) {
             setEditText("");
           }}
           style={
-            showFull
+            showFull | showFullHold
               ? {
                   textAlign: "center",
-                  minHeight: "29px",
+                  padding: 0,
                 }
               : {
                   textAlign: "center",
@@ -115,7 +116,7 @@ function Reminder(props) {
               <div
                 className="dropdown-item addnewButton"
                 onClick={() => {
-                  setShowFull(!showFull);
+                  setShowFullHold(!showFullHold);
                 }}
                 href="#"
               >
