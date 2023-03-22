@@ -1,5 +1,6 @@
 .App {
   min-height: 100vh;
+  overflow-y: scroll;
 }
 
 .loadBar {
@@ -73,7 +74,6 @@
 .remindersContainer {
   width: 60%;
   margin: auto;
-  margin-top: 10%;
   text-align: center;
 }
 .dashButton {

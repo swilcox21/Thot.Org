@@ -24,10 +24,7 @@ function ThotList(props) {
 
   return (
     <>
-      <div
-        className="container-fluid"
-        style={{ paddingTop: 150, height: "200vh" }}
-      >
+      <div className="container-fluid" style={{ height: "200vh" }}>
         {thots && thots.map((thot) => <Thot thot={thot} />)}
       </div>
     </>

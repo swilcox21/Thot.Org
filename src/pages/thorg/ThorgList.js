@@ -34,7 +34,6 @@ function ThorgList(props) {
           height: "100vh",
           backgroundColor: "white",
           textAlign: "center",
-          paddingTop: 90,
         }}
       >
         {thorgs.length > 0 &&

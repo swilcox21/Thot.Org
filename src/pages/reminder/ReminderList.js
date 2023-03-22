@@ -53,47 +53,6 @@ function ReminderList(props) {
   const inputRef = useRef(null);
   const getRef = useRef(false);
 
-  // ********** GET THESE INTO ACTIONS FOLDER ***********
-  function findWrapperPosition() {
-    if (wrapperDivRef.current) {
-      const xPos = wrapperDivRef.current.offsetLeft + window.scrollX;
-      const yPos = wrapperDivRef.current.offsetTop + window.scrollY;
-      console.log("WRAP", { wdidth: xPos, hieght: yPos });
-      console.log("appHeight", appHeight);
-      setPadSize(appHeight);
-      dispatch({
-        type: SET_WRAP_POSITION,
-        screenSize: yPos,
-      });
-      return yPos;
-    }
-  }
-  function findContainerPosition() {
-    if (containerDivRef.current) {
-      const xPos = containerDivRef.current.offsetLeft + window.scrollX;
-      const yPos = containerDivRef.current.offsetTop + window.scrollY;
-      console.log("CONTAIN", { width: xPos, height: yPos });
-
-      dispatch({
-        type: SET_CONT_POSITION,
-        screenSize: yPos,
-      });
-      return yPos;
-    }
-  }
-  function findFooterPosition() {
-    if (FooterivRef.current) {
-      const xPos = FooterivRef.current.offsetLeft + window.scrollX;
-      const yPos = FooterivRef.current.offsetTop + window.scrollY;
-      console.log("FOOTER", { wdidth: xPos, hieght: yPos });
-      dispatch({
-        type: SET_FOOT_POSITION,
-        screenSize: yPos,
-      });
-      return yPos;
-    }
-  }
-
   const appHeight = Math.round(footSize - contSize);
   const [padSize, setPadSize] = useState(appHeight);
 
@@ -102,19 +61,8 @@ function ReminderList(props) {
     console.log("INITIAL");
     getReminders(dispatch);
     getRef.current = true;
-    // dispatch({ type: SET_NAV, nav: window.location.pathname });
-    findContainerPosition();
-    findWrapperPosition();
-    findFooterPosition();
-    console.log("PROPS:", props);
-    window.addEventListener("scroll", findContainerPosition);
-    window.addEventListener("scroll", findWrapperPosition);
-    window.addEventListener("scroll", findFooterPosition);
-    return () => {
-      window.removeEventListener("scroll", findContainerPosition);
-      window.removeEventListener("scroll", findWrapperPosition);
-      window.removeEventListener("scroll", findContainerPosition);
-    };
+    window.scrollTo(0, 0);
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -181,14 +129,15 @@ function ReminderList(props) {
   }
 
   return (
-    <div ref={wrapperDivRef} className="reminderWrapper">
+    <div className="reminderWrapper">
       {loading && <div className="loadBar">I LOVE CHRISTINE</div>}
       <br />
       <br />
-      <br />
-      <br />
-      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
-        <div ref={containerDivRef} className="remindersContainer">
+      <div ref={containerDivRef} className="remindersContainer">
+        <DndContext
+          collisionDetection={closestCorners}
+          onDragEnd={handleDragEnd}
+        >
           <SortableContext items={droppable}>
             {droppable.length > 0 &&
               droppable.map((drop, index) =>
@@ -204,10 +153,11 @@ function ReminderList(props) {
                   ))
               )}
           </SortableContext>
-          {/* NEW REMINDER */}
-          {reminderToggle ? (
-            <div>
-              {/* <input
+        </DndContext>
+        {/* NEW REMINDER */}
+        {reminderToggle ? (
+          <div>
+            {/* <input
                 className="phantomCheckbox"
                 type="checkbox"
                 checked={checked}
@@ -215,28 +165,28 @@ function ReminderList(props) {
                   dispatch({ type: SET_CHECKED, checked: checked })
                 }
               /> */}
-              <TextareaAutosize
-                ref={inputRef}
-                className="col-8 borderBottom mx-3 my-2 py-1 pl-2"
-                placeholder="Add new Reminder here..."
-                type="text"
-                defaultValue={""}
-                value={text}
-                onChange={(e) => {
-                  dispatch({ type: SET_TEXT, text: e.target.value });
-                }}
-                onBlur={() => {
-                  console.log("i love you chritine");
-                  text !== "" && postReminder(dispatch, text);
-                  dispatch({
-                    type: SET_REMINDER_TOGGLE,
-                    reminderToggle: false,
-                  });
-                }}
-                autoFocus
-                style={{ textAlign: "center" }}
-              />
-              {/* <button
+            <TextareaAutosize
+              ref={inputRef}
+              className="col-8 borderBottom mx-3 my-2 py-1 pl-2"
+              placeholder="Add new Reminder here..."
+              type="text"
+              defaultValue={""}
+              value={text}
+              onChange={(e) => {
+                dispatch({ type: SET_TEXT, text: e.target.value });
+              }}
+              onBlur={() => {
+                console.log("i love you chritine");
+                text !== "" && postReminder(dispatch, text);
+                dispatch({
+                  type: SET_REMINDER_TOGGLE,
+                  reminderToggle: false,
+                });
+              }}
+              autoFocus
+              style={{ textAlign: "center" }}
+            />
+            {/* <button
                 className="submitButton"
                 onClick={() => {
                   console.log("its a me MARIO");
@@ -245,35 +195,28 @@ function ReminderList(props) {
               >
                 +
               </button> */}
-              <div
-                style={{ height: "100vh" }}
-                onClick={() =>
-                  dispatch({
-                    type: SET_REMINDER_TOGGLE,
-                    reminderToggle: false,
-                  })
-                }
-              ></div>
-            </div>
-          ) : (
             <div
+              style={{ height: "80vh" }}
               onClick={() =>
                 dispatch({
                   type: SET_REMINDER_TOGGLE,
-                  reminderToggle: true,
+                  reminderToggle: false,
                 })
               }
-              style={{ height: "100vh" }}
             ></div>
-          )}
-        </div>
-      </DndContext>
-      <br />
-      <br />
-      <br />
-      <footer ref={FooterivRef} className="footer">
-        thot.org
-      </footer>
+          </div>
+        ) : (
+          <div
+            onClick={() =>
+              dispatch({
+                type: SET_REMINDER_TOGGLE,
+                reminderToggle: true,
+              })
+            }
+            style={{ height: "80vh" }}
+          ></div>
+        )}
+      </div>
     </div>
   );
 }
