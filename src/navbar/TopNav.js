@@ -36,15 +36,78 @@ function TopNav(props) {
   ];
 
   return (
-    <>
-      {props.showNav && (
+    <div>
+      {props.showNav ? (
+        <>
+          <div
+            style={{
+              width: "100%",
+              padding: "25px",
+              height: "90px",
+              position: "fixed",
+              zIndex: 999,
+              display: "flex",
+              justifyContent: "space-between",
+              color: "white",
+              backgroundColor: "rgb(85, 85, 85)",
+            }}
+          >
+            {window.location.pathname === "/thorgs" ? (
+              <>
+                <i
+                  className="fa fa-bell"
+                  aria-hidden="true"
+                  style={{ fontSize: "42px", cursor: "pointer" }}
+                  onClick={() => navigate("/")}
+                ></i>
+                <h2 className="my-2">THORG</h2>
+              </>
+            ) : window.location.pathname === "/" ? (
+              <>
+                <i
+                  className="fa fa-bars"
+                  aria-hidden="true"
+                  style={{ fontSize: "42px", cursor: "pointer" }}
+                  onClick={() => navigate("/thorgs")}
+                ></i>
+                <h2 className="my-2">REM</h2>
+              </>
+            ) : window.location.pathname === "/thorgs/" + thorg ? (
+              <>
+                <i
+                  className="fa fa-bars"
+                  aria-hidden="true"
+                  style={{ fontSize: "42px", cursor: "pointer" }}
+                  onClick={() => navigate("/thorgs")}
+                ></i>
+                <h2 className="my-2">
+                  {thorg.replace(":", "").toLocaleUpperCase()}
+                </h2>
+              </>
+            ) : null}
+            <DropDown
+              //   direction={"dropleft"}
+              dropIcon={
+                <i
+                  style={{ fontSize: "42px", cursor: "pointer" }}
+                  class="fa fa-caret-square-o-down"
+                  aria-hidden="true"
+                ></i>
+              }
+              dropList={dropList}
+              dropStyle={{ minWidth: "50px", padding: 0, marginRight: "15px" }}
+            />
+          </div>
+          <div style={{ height: 90 }}></div>
+        </>
+      ) : (
         <div
           style={{
             width: "100%",
             padding: "25px",
             height: "90px",
-            position: "fixed",
-            zIndex: 999,
+            position: "relative",
+            zIndex: 990,
             display: "flex",
             justifyContent: "space-between",
             color: "white",
@@ -98,68 +161,6 @@ function TopNav(props) {
           />
         </div>
       )}
-
-      {/* SHOWNAV */}
-      <div
-        style={{
-          width: "100%",
-          padding: "25px",
-          height: "90px",
-          position: "relative",
-          zIndex: 990,
-          display: "flex",
-          justifyContent: "space-between",
-          color: "white",
-          backgroundColor: "rgb(85, 85, 85)",
-        }}
-      >
-        {window.location.pathname === "/thorgs" ? (
-          <>
-            <i
-              className="fa fa-bell"
-              aria-hidden="true"
-              style={{ fontSize: "42px", cursor: "pointer" }}
-              onClick={() => navigate("/")}
-            ></i>
-            <h2 className="my-2">THORG</h2>
-          </>
-        ) : window.location.pathname === "/" ? (
-          <>
-            <i
-              className="fa fa-bars"
-              aria-hidden="true"
-              style={{ fontSize: "42px", cursor: "pointer" }}
-              onClick={() => navigate("/thorgs")}
-            ></i>
-            <h2 className="my-2">REM</h2>
-          </>
-        ) : window.location.pathname === "/thorgs/" + thorg ? (
-          <>
-            <i
-              className="fa fa-bars"
-              aria-hidden="true"
-              style={{ fontSize: "42px", cursor: "pointer" }}
-              onClick={() => navigate("/thorgs")}
-            ></i>
-            <h2 className="my-2">
-              {thorg.replace(":", "").toLocaleUpperCase()}
-            </h2>
-          </>
-        ) : null}
-        <DropDown
-          //   direction={"dropleft"}
-          dropIcon={
-            <i
-              style={{ fontSize: "42px", cursor: "pointer" }}
-              class="fa fa-caret-square-o-down"
-              aria-hidden="true"
-            ></i>
-          }
-          dropList={dropList}
-          dropStyle={{ minWidth: "50px", padding: 0, marginRight: "15px" }}
-        />
-      </div>
-
       {/* {window.location.pathname === "/thorgs/" + thorg && (
         <div
           onClick={() => navigate("/thorgs")}
@@ -177,7 +178,7 @@ function TopNav(props) {
           <i className="fa fa-arrow-left" aria-hidden="true"></i>
         </div>
       )} */}
-    </>
+    </div>
   );
 }
 
