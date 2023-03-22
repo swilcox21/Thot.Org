@@ -21,24 +21,24 @@ function Layout(props) {
   const [showNav, setShowNav] = useState(true);
   console.log(state);
 
-  useEffect(() => {
-    var scroll = window.scrollY;
-    const handleScroll = (event) => {
-      scroll > window.scrollY || scroll <= 20
-        ? setShowNav(true)
-        : setShowNav(false);
-      scroll = window.scrollY;
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   useEffect(() => {
+  //     var scroll = window.scrollY;
+  //     const handleScroll = (event) => {
+  //       scroll > window.scrollY || scroll <= 20
+  //         ? setShowNav(true)
+  //         : setShowNav(false);
+  //       scroll = window.scrollY;
+  //     };
+  //     window.addEventListener("scroll", handleScroll);
+  //     return () => {
+  //       window.removeEventListener("scroll", handleScroll);
+  //     };
+  //   }, []);
 
   return (
     <>
       {(props.state.app.sideNav === false) &
-      (showNav === true) &
+      //   (showNav === true) &
       (history.location.pathname !== "/login") ? (
         <TopNav {...props} />
       ) : null}

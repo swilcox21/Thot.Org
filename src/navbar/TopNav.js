@@ -40,10 +40,10 @@ function TopNav(props) {
       <div
         style={{
           width: "100%",
-          height: 90,
+          padding: "25px",
+          height: "90px",
           position: "fixed",
           zIndex: 999,
-          padding: "5%",
           display: "flex",
           justifyContent: "space-between",
           color: "white",
@@ -73,10 +73,10 @@ function TopNav(props) {
         ) : window.location.pathname === "/thorgs/" + thorg ? (
           <>
             <i
-              className="fa fa-bell"
+              className="fa fa-bars"
               aria-hidden="true"
               style={{ fontSize: "42px", cursor: "pointer" }}
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/thorgs")}
             ></i>
             <h2 className="my-2">
               {thorg.replace(":", "").toLocaleUpperCase()}
@@ -96,7 +96,7 @@ function TopNav(props) {
           dropStyle={{ minWidth: "50px", padding: 0, marginRight: "15px" }}
         />
       </div>
-      {window.location.pathname === "/thorgs/" + thorg && (
+      {/* {window.location.pathname === "/thorgs/" + thorg && (
         <div
           onClick={() => navigate("/thorgs")}
           style={{
@@ -112,7 +112,7 @@ function TopNav(props) {
         >
           <i className="fa fa-arrow-left" aria-hidden="true"></i>
         </div>
-      )}
+      )} */}
     </>
   );
 }

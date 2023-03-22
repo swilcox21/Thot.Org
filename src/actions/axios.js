@@ -26,7 +26,6 @@ export async function refreshAccessToken(dispatch) {
     .catch((err) => {
       localStorage.removeItem("refresh");
       localStorage.removeItem("access");
-      alert("your session has expired please log back in");
       window.location = redirectURL + "login";
     });
 }
