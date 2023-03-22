@@ -89,14 +89,14 @@
   flex-direction: column;
 }
 .reminderTextAreaShow {
-  height: fit-content;
+  height: fit-content !important;
 }
 .reminderTextArea {
   max-height: 34px;
   overflow: hidden;
 }
 .reminderTextArea:focus {
-  max-height: fit-content;
+  max-height: fit-content !important;
   min-height: 34px;
 }
 .thotsHeader {

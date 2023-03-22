@@ -92,7 +92,6 @@ function Reminder(props) {
               paddingRight: 8,
             }}
           >
-            {/* <i className="fa fa-angle-down" aria-hidden="true"></i> */}
             <i className="fa fa-chevron-down" aria-hidden="true"></i>
           </div>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -122,14 +121,6 @@ function Reminder(props) {
                 dispatch={dispatch}
                 id={props.reminder.id}
               />
-              {/* <button
-                type="button"
-                className="btn btn-primary"
-                data-toggle="modal"
-                onClick={() => deleteReminder(dispatch, props.reminder.id)}
-              >
-                X
-              </button> */}
             </div>
           </div>
         </div>
