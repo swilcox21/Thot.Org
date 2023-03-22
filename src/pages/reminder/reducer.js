@@ -68,7 +68,7 @@ export default function reminderReducer(state = initialState, action) {
     }
     // showFull
     case SET_SHOW_FULL: {
-      return { ...state, showFull: !action.showFull };
+      return { ...state, showFull: action.showFull };
     }
     // showDash
     case SET_SHOW_DASH: {

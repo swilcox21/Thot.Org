@@ -49,7 +49,6 @@ function Reminder(props) {
             padding: "5px",
             paddingLeft: "7px",
             paddingRight: "7px",
-            // marginRight: `${showFull ? "-15px" : "-35px"}`,
           }}
         >
           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
@@ -57,23 +56,6 @@ function Reminder(props) {
           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>&nbsp;
           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
         </div>
-        {/* <div className="col-9">
-          <CodeMirror
-            height={showFull ? "auto" : "25px"}
-            value={props.reminder.text}
-            extensions={[javascript({ jsx: true })]}
-            onChange={onChange}
-            onFocus={() => setShowFull(true)}
-            onBlur={() => {
-              editText !== "" &&
-                putReminder(dispatch, [
-                  { id: props.reminder.id, text: editText },
-                ]);
-              setShowFull(false);
-              setEditText("");
-            }}
-          />
-        </div> */}
         <TextareaAutosize
           className={
             showFull
@@ -83,17 +65,14 @@ function Reminder(props) {
           type="text"
           defaultValue={props.reminder.text}
           onChange={(e) => {
-            dispatch({
-              type: SET_EDIT_TEXT,
-              editText: e.target.value,
-            });
+            setEditText(e.target.value);
           }}
           onBlur={() => {
-            editText !== "" &&
+            editText.length > 0 &&
               putReminder(dispatch, [
                 { id: props.reminder.id, text: editText },
               ]);
-            dispatch({ type: SET_EDIT_TEXT, editText: "" });
+            setEditText("");
           }}
           style={{ textAlign: "center" }}
         />
@@ -135,7 +114,7 @@ function Reminder(props) {
               <div
                 className="dropdown-item addnewButton"
                 onClick={() => {
-                  dispatch({ type: SET_SHOW_FULL, showFull: showFull });
+                  setShowFull(!showFull);
                 }}
                 href="#"
               >

@@ -40,7 +40,12 @@ export default function BasicModal(props) {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {excerpt}
           </Typography>
+          <br />
           <Button
+            style={{
+              float: "right",
+              backgroundColor: "rgba(206, 206, 206, 0.359)",
+            }}
             onClick={() => action && action(dispatch && dispatch, id && id)}
           >
             {actionButton}
