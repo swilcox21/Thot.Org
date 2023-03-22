@@ -3,13 +3,13 @@ import "../../App.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import React, { useEffect, useRef, useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
 import { putReminder, deleteReminder } from "../../actions/axios";
 import { SET_EDIT_TEXT, SET_SHOW_FULL } from "./reducer";
 import { store } from "../..";
 import BasicModal from "../../components/Modal";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
+import { TextareaAutosize } from "@mui/material";
 
 function Reminder(props) {
   const dispatch = store.dispatch;
@@ -57,24 +57,34 @@ function Reminder(props) {
           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
         </div>
         <TextareaAutosize
-          className={
-            showFull
-              ? "col-8 borderBottom reminderTextAreaShow mx-3 py-1 pl-2"
-              : "col-8 borderBottom reminderTextArea mx-3 py-1 pl-2"
-          }
+          className="col-8 borderBottom mx-3 "
           type="text"
           defaultValue={props.reminder.text}
           onChange={(e) => {
             setEditText(e.target.value);
           }}
+          onFocus={() => setShowFull(true)}
           onBlur={() => {
             editText.length > 0 &&
               putReminder(dispatch, [
                 { id: props.reminder.id, text: editText },
               ]);
+            setShowFull(false);
             setEditText("");
           }}
-          style={{ textAlign: "center" }}
+          style={
+            showFull
+              ? {
+                  textAlign: "center",
+                  maxHeight: "fit-content",
+                  minHeight: "36px",
+                }
+              : {
+                  textAlign: "center",
+                  overflow: "hidden",
+                  maxHeight: "36px",
+                }
+          }
         />
         {/* DROP DOWN */}
         <div className="dropdown dropleft">
