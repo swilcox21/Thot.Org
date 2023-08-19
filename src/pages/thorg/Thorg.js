@@ -72,7 +72,7 @@ function Thorg(props) {
       /> */}
       <div ref={setNodeRef} style={style} className='mindset'>
         <div
-          onClick={deleteThorg(dispatch)}
+          onClick={() => deleteThorg(dispatch)}
           style={{
             cursor: "pointer",
             minWidth: "20%",

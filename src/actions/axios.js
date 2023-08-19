@@ -147,7 +147,7 @@ export function getThorgs(dispatch) {
   dispatch({ type: LOADING });
   async function thorgsGet() {
     await axios
-      .get(`${baseURL}/groop/`, {
+      .get(`${baseURL}/mindset/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
@@ -173,7 +173,7 @@ export function postThorg(dispatch, name) {
   const data = [{ name: name }];
   async function thorgPost(data) {
     await axios
-      .post(`${baseURL}/groop/`, data, {
+      .post(`${baseURL}/mindset/`, data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
@@ -201,7 +201,7 @@ export function putThorg(dispatch, data) {
   dispatch({ type: LOADING });
   async function thorgPut(data) {
     await axios
-      .put(`${baseURL}/groop/`, data, {
+      .put(`${baseURL}/mindset/`, data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
