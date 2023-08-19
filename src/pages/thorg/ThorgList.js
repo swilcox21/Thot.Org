@@ -36,8 +36,10 @@ function ThorgList(props) {
 
   //////// ONLOAD ////////
   useEffect(() => {
+    console.log("INITIAL");
     getThorgs(dispatch);
-    // FUNC TO SET ME TO TOP OF PAGE ON LOAD
+    getRef.current = true;
+    return () => {};
   }, []);
 
   useEffect(() => {
