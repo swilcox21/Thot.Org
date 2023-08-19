@@ -35,31 +35,34 @@ function Reminder(props) {
   }, []);
   return (
     <>
-      <div className="reminder" ref={setNodeRef} style={style}>
-        <div
-          {...attributes}
-          {...listeners}
-          style={{
-            border: "1px solid gray",
-            backgroundColor: "white",
-            borderRadius: "5px",
-            position: "relative",
-            zIndex: 998,
-            color: "gray",
-            cursor: "grab",
-            padding: "5px",
-            paddingLeft: "7px",
-            paddingRight: "7px",
-          }}
-        >
-          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-          &nbsp;
-          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>&nbsp;
-          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+      <div className='reminder' ref={setNodeRef} style={style}>
+        {/* DROP DOWN */}
+        <div className='dropdown dropleft'>
+          <BasicModal
+            showButton={
+              showFullHold ? (
+                <i className='fa fa-chevron-down' aria-hidden='true'></i>
+              ) : (
+                <i className='fa fa-chevron-right' aria-hidden='true'></i>
+              )
+            }
+            header={null}
+            excerpt={`Are you sure you want to delete reminder #${props.id}`}
+            action={deleteReminder}
+            dblClick={true}
+            click={() => {
+              setShowFullHold(!showFullHold);
+            }}
+            actionButton={"DELETE"}
+            dispatch={dispatch}
+            id={props.reminder.id}
+          />
         </div>
+
+        {/* TEXT AREA */}
         <TextareaAutosize
-          className="col-8 borderBottom mx-3 "
-          type="text"
+          className='col-8 borderBottom mx-3 '
+          type='text'
           defaultValue={props.reminder.text}
           onChange={(e) => {
             setEditText(e.target.value);
@@ -78,6 +81,8 @@ function Reminder(props) {
               ? {
                   textAlign: "center",
                   padding: 0,
+                  paddingBottom: 5,
+                  marginBottom: 5,
                 }
               : {
                   textAlign: "center",
@@ -86,9 +91,39 @@ function Reminder(props) {
                 }
           }
         />
-        {/* DROP DOWN */}
-        <div className="dropdown dropleft">
-          <div
+
+        {/* GRABBALE DROPPABLE */}
+        <div
+          {...attributes}
+          {...listeners}
+          style={{
+            // border: "1px solid gray",
+            backgroundColor: "white",
+            borderRadius: "5px",
+            position: "relative",
+            zIndex: 998,
+            color: "gray",
+            cursor: "grab",
+            padding: "5px",
+            paddingLeft: "7px",
+            paddingRight: "7px",
+          }}
+        >
+          <i class='fa fa-hand-rock-o' aria-hidden='true'></i>
+        </div>
+        <br />
+        <br />
+      </div>
+    </>
+  );
+}
+
+export default Reminder;
+// vercel
+
+///////// DROP DOWN CODE ///////
+{
+  /* <div
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
@@ -122,25 +157,6 @@ function Reminder(props) {
               >
                 {showFull ? "shrink" : "grow"}
               </div>
-              <BasicModal
-                showButton={"X"}
-                header={null}
-                excerpt={`Are you sure you want to delete reminder #${props.id}`}
-                action={deleteReminder}
-                actionButton={"DELETE"}
-                dispatch={dispatch}
-                id={props.reminder.id}
-              />
             </div>
-          </div>
-        </div>
-
-        <br />
-        <br />
-      </div>
-    </>
-  );
+          </div> */
 }
-
-export default Reminder;
-// vercel

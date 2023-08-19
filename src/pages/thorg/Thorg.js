@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import "../../App.css";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { BrowserRouter, useNavigate } from "react-router-dom";
 import { store, redirectURL, history } from "../..";
 import React, { useEffect, useRef, useState } from "react";
@@ -8,14 +10,34 @@ import { SET_REMINDER_TOGGLE, SET_TEXT } from "../reminder/reducer";
 import { postReminder } from "../../actions/axios";
 import TextareaAutosize from "react-textarea-autosize";
 import { connect } from "react-redux";
-import { getThorgs } from "../../actions/axios";
+import { getThorgs, deleteThorg, putThorg } from "../../actions/axios";
 import { postThorg } from "../../actions/axios";
+import BasicModal from "../../components/Modal";
 
 function Thorg(props) {
   const dispatch = store.dispatch;
   const { text, checked, reminderToggle } = props.state.reminder;
   //////// STATE ////////
+  const [hiorbye, setHiorbye] = useState("Hii");
+  const [editText, setEditText] = useState("");
+  const [showFull, setShowFull] = useState(false);
+  const [showFullHold, setShowFullHold] = useState(false);
 
+  const [data, setdata] = useState([{ text: "" }]);
+  const [modal, setmodal] = useState(false);
+
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: props.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  const onChange = React.useCallback((value, viewUpdate) => {
+    console.log("value:", value);
+    setEditText(value);
+  }, []);
   //////// USEREF ////////
   const inputRef = useRef(null);
 
@@ -29,21 +51,75 @@ function Thorg(props) {
 
   return (
     <>
-      <div
-        className="col-12"
-        onClick={() => navigate(`:${props.name}`)}
-        style={{
-          padding: "35px",
-          margin: "auto",
-          fontSize: "42px ",
-          color: "rgb(85, 85, 85)",
-          backgroundColor: "whitesmoke",
-          borderBottom: "1px solid gray",
-          // marginBottom: "10px",
-          // borderRadius: "5px",
+      {/* <BasicModal
+        showButton={
+          showFullHold ? (
+            <i className='fa fa-chevron-down' aria-hidden='true'></i>
+          ) : (
+            <i className='fa fa-chevron-right' aria-hidden='true'></i>
+          )
+        }
+        header={null}
+        excerpt={`Are you sure you want to delete reminder #${props.id}`}
+        action={deleteReminder}
+        dblClick={true}
+        click={() => {
+          setShowFullHold(!showFullHold);
         }}
-      >
-        {props.name}
+        actionButton={"DELETE"}
+        dispatch={dispatch}
+        id={props.reminder.id}
+      /> */}
+      <div ref={setNodeRef} style={style} className='mindset'>
+        <div
+          onClick={deleteThorg(dispatch)}
+          style={{
+            cursor: "pointer",
+            minWidth: "20%",
+            height: 130,
+            lineHeight: "130px",
+            position: "relative",
+            zIndex: 9,
+            fontSize: 36,
+            color: "#555555",
+          }}
+        >
+          X
+        </div>
+        <div
+          className='col-12'
+          onClick={() => navigate(`:${props.name}`)}
+          style={{
+            paddingTop: "35px",
+            paddingBottom: "35px",
+            margin: "auto",
+            maxWidth: "60%",
+            fontSize: "42px ",
+            color: "rgb(85, 85, 85)",
+
+            // marginBottom: "10px",
+            // borderRadius: "5px",
+          }}
+        >
+          {props.name}
+        </div>
+        <div
+          {...attributes}
+          {...listeners}
+          // onClick={() => }
+          style={{
+            cursor: "grab",
+            minWidth: "20%",
+            height: 130,
+            position: "relative",
+            zIndex: 9,
+            lineHeight: "130px",
+            fontSize: 36,
+            color: "#555555",
+          }}
+        >
+          <i class='fa fa-hand-rock-o' aria-hidden='true'></i>
+        </div>
       </div>
     </>
   );

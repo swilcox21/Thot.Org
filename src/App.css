@@ -78,10 +78,18 @@
 .dashButton {
   margin-right: 5px;
 }
+.mindset {
+  margin: auto;
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  background-color: whitesmoke;
+  border-bottom: 1px solid gray;
+}
 .reminder {
   margin: auto;
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: center;
 }
 .reminderWrapper {
@@ -90,6 +98,7 @@
 }
 .reminderTextAreaShow {
   max-height: fit-content;
+  padding-bottom: 5px;
   min-height: 34px;
 }
 .reminderTextArea {

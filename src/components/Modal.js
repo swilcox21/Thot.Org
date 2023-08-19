@@ -21,23 +21,38 @@ export default function BasicModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { dispatch, id, showButton, header, excerpt, action, actionButton } =
-    props;
+  const {
+    dispatch,
+    id,
+    showButton,
+    header,
+    excerpt,
+    action,
+    actionButton,
+    dblClick,
+    click,
+  } = props;
 
   return (
     <div>
-      <Button onClick={handleOpen}>{showButton}</Button>
+      <Button
+        sx={{ minWidth: 30, fontSize: 18, color: "gray" }}
+        onClick={dblClick ? () => click() : handleOpen}
+        onDoubleClick={dblClick && handleOpen}
+      >
+        {showButton}
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
             {header}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography id='modal-modal-description' sx={{ mt: 2 }}>
             {excerpt}
           </Typography>
           <br />
