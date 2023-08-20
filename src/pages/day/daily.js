@@ -16,7 +16,7 @@ function Daily(props) {
   //////// STATE ///////
   const [editText, setEditText] = useState("");
   const [showFull, setShowFull] = useState(false);
-  const [showFullHold, setShowFullHold] = useState(false);
+  const [showFullHold, setShowFullHold] = useState(true);
 
   const [data, setdata] = useState([{ text: "" }]);
   const [modal, setmodal] = useState(false);
