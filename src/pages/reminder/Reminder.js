@@ -56,6 +56,7 @@ function Reminder(props) {
             actionButton={"DELETE"}
             dispatch={dispatch}
             id={props.reminder.id}
+            styles={{ minWidth: 30, fontSize: 18, color: "gray" }}
           />
         </div>
 

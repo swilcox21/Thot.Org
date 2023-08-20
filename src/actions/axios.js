@@ -1,8 +1,8 @@
 import axios from "axios";
 import { baseURL, redirectURL } from "..";
 import { LOADING } from "../reducer";
-import { THORG_POST } from "../pages/reminder/reducer";
-import { THORG_GET } from "../pages/reminder/reducer";
+import { THORG_POST, THOT_POST } from "../pages/reminder/reducer";
+import { THORG_GET, THOT_GET } from "../pages/reminder/reducer";
 import {
   REMINDER_GET,
   REMINDER_POST,
@@ -147,7 +147,7 @@ export function getThorgs(dispatch) {
   dispatch({ type: LOADING });
   async function thorgsGet() {
     await axios
-      .get(`${baseURL}/groop/`, {
+      .get(`${baseURL}/mindset/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
@@ -173,7 +173,7 @@ export function postThorg(dispatch, name) {
   const data = [{ name: name }];
   async function thorgPost(data) {
     await axios
-      .post(`${baseURL}/groop/`, data, {
+      .post(`${baseURL}/mindset/`, data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
@@ -201,7 +201,7 @@ export function putThorg(dispatch, data) {
   dispatch({ type: LOADING });
   async function thorgPut(data) {
     await axios
-      .put(`${baseURL}/groop/`, data, {
+      .put(`${baseURL}/mindset/`, data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
         },
@@ -227,7 +227,7 @@ export function deleteThorg(dispatch, thorg_id) {
   async function thorgDelete(thorg_id) {
     console.log("DELETE: ", thorg_id);
     await axios
-      .delete(`${baseURL}/groop/` + thorg_id, {
+      .delete(`${baseURL}/mindset/` + thorg_id, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
           "Content-Type": "application/json",
@@ -256,9 +256,9 @@ export function deleteThorg(dispatch, thorg_id) {
   });
 }
 
-export function postThot(dispatch, name) {
+export function postThot(dispatch, text, mindset_id) {
   dispatch({ type: LOADING });
-  const data = [{ name: name }];
+  const data = [{ text: text, mindset: { id: mindset_id } }];
   async function thotPost(data) {
     await axios
       .post(`${baseURL}/thot/`, data, {
@@ -269,7 +269,7 @@ export function postThot(dispatch, name) {
       .then((response) => {
         console.log("THE POST:", response.data);
         dispatch({
-          type: THORG_POST,
+          type: THOT_POST,
           payload: response.data,
         });
       });

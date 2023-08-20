@@ -9,11 +9,9 @@ import {
   SET_REMINDER_TOGGLE,
   SET_TEXT,
 } from "../reminder/reducer";
-import { postReminder, putThorg } from "../../actions/axios";
+import { getThorgs, postThorg, putThorg } from "../../actions/axios";
 import TextareaAutosize from "react-textarea-autosize";
 import { connect } from "react-redux";
-import { getThorgs } from "../../actions/axios";
-import { postThorg } from "../../actions/axios";
 import Thorg from "./Thorg";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { closestCorners, DndContext } from "@dnd-kit/core";
@@ -71,6 +69,18 @@ function ThorgList(props) {
       putThorg(dispatch, newOrder);
     }
   }, [newOrder]);
+
+  function newOrderFunc() {
+    const orderArr = [];
+    thorgs.map((tho) => {
+      console.log(thorgs.indexOf(tho));
+      let data = { id: tho.id, order: thorgs.indexOf(tho) + 1 };
+      orderArr.push(data);
+      return data;
+    });
+    setdroppable(orderArr);
+  }
+
   //////// DnD KIT DRAGGABLE FUNCTION ////////
   function handleDragEnd(event) {
     console.log("Drag end called");
@@ -140,7 +150,6 @@ function ThorgList(props) {
                 dispatch({ type: SET_TEXT, text: e.target.value });
               }}
               onBlur={() => {
-                console.log("i love you chritine");
                 text !== "" && postThorg(dispatch, text);
                 dispatch({
                   type: SET_REMINDER_TOGGLE,

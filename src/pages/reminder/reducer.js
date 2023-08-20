@@ -161,6 +161,43 @@ export default function reminderReducer(state = initialState, action) {
         loading: false,
       };
     }
+    // thorgs
+    case THORG_GET: {
+      console.log("DELTE_GET: ", action.thots);
+      return {
+        ...state,
+        loading: false,
+        thots: action.thots,
+      };
+    }
+    case THOT_POST: {
+      return {
+        ...state,
+        thots: [...state.thots, action.payload[0]],
+        loading: false,
+        text: "",
+        checked: false,
+      };
+    }
+    case THOT_PUT: {
+      return {
+        ...state,
+        thots: [
+          ...state.thots.filter((thot) => thot.id !== action.payload.id),
+          action.payload,
+        ],
+        loading: false,
+        editText: "",
+      };
+    }
+    case THOT_DELETE: {
+      console.log(action.payload);
+      return {
+        ...state,
+        thots: state.thots.filter((thot) => thot.id !== action.payload),
+        loading: false,
+      };
+    }
     default:
       return state;
   }
@@ -186,6 +223,10 @@ export const THORG_GET = "thorg/thorgGet";
 export const THORG_POST = "thorg/thorgPost";
 export const THORG_PUT = "thorg/thorgPut";
 export const THORG_DELETE = "thorg/thorgDelete";
+export const THOT_GET = "thot/thotGet";
+export const THOT_POST = "thot/thotPost";
+export const THOT_PUT = "thot/thotPut";
+export const THOT_DELETE = "thot/thotDelete";
 export const SET_WRAP_POSITION = "wrap/wrapPosition";
 export const SET_CONT_POSITION = "cont/contPosition";
 export const SET_FOOT_POSITION = "foot/foot Position";

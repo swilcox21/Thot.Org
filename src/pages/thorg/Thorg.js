@@ -27,7 +27,7 @@ function Thorg(props) {
   const [modal, setmodal] = useState(false);
 
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: props.id });
+    useSortable({ id: props.thorg.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -51,28 +51,8 @@ function Thorg(props) {
 
   return (
     <>
-      {/* <BasicModal
-        showButton={
-          showFullHold ? (
-            <i className='fa fa-chevron-down' aria-hidden='true'></i>
-          ) : (
-            <i className='fa fa-chevron-right' aria-hidden='true'></i>
-          )
-        }
-        header={null}
-        excerpt={`Are you sure you want to delete reminder #${props.id}`}
-        action={deleteReminder}
-        dblClick={true}
-        click={() => {
-          setShowFullHold(!showFullHold);
-        }}
-        actionButton={"DELETE"}
-        dispatch={dispatch}
-        id={props.reminder.id}
-      /> */}
       <div ref={setNodeRef} style={style} className='mindset'>
         <div
-          onClick={() => deleteThorg(dispatch)}
           style={{
             cursor: "pointer",
             minWidth: "20%",
@@ -84,7 +64,26 @@ function Thorg(props) {
             color: "#555555",
           }}
         >
-          X
+          <BasicModal
+            // showButton={
+            //   showFullHold ? (
+            //     <i className='fa fa-chevron-down' aria-hidden='true'></i>
+            //   ) : (
+            //     <i className='fa fa-chevron-right' aria-hidden='true'></i>
+            //   )
+            // }
+            header={null}
+            excerpt={`Are you sure you want to delete reminder #${props.thorg.id}`}
+            action={deleteThorg}
+            dblClick={true}
+            click={() => {
+              setShowFull(!showFullHold);
+            }}
+            actionButton={"DELETE"}
+            dispatch={dispatch}
+            id={props.thorg.id}
+            styles={{ width: "100%", height: 130, fontSize: 36 }}
+          />
         </div>
         <div
           className='col-12'
@@ -117,9 +116,7 @@ function Thorg(props) {
             fontSize: 36,
             color: "#555555",
           }}
-        >
-          <i class='fa fa-hand-rock-o' aria-hidden='true'></i>
-        </div>
+        ></div>
       </div>
     </>
   );

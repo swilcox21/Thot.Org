@@ -31,12 +31,13 @@ export default function BasicModal(props) {
     actionButton,
     dblClick,
     click,
+    styles,
   } = props;
 
   return (
     <div>
       <Button
-        sx={{ minWidth: 30, fontSize: 18, color: "gray" }}
+        sx={styles}
         onClick={dblClick ? () => click() : handleOpen}
         onDoubleClick={dblClick && handleOpen}
       >
