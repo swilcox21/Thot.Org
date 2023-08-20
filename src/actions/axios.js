@@ -256,6 +256,31 @@ export function deleteThorg(dispatch, thorg_id) {
   });
 }
 
+export function getThots(dispatch, mindset_id) {
+  dispatch({ type: LOADING });
+  async function thotsGet() {
+    await axios
+      .get(`${baseURL}/mindset/${mindset_id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      })
+      .then((response) => {
+        console.log("THE GET:", response.data);
+        dispatch({
+          type: THORG_GET,
+          thorgs: response.data,
+        });
+        return;
+      });
+  }
+  thotsGet().catch((err) => {
+    refreshAccessToken(dispatch).then(() => {
+      thotsGet();
+    });
+  });
+}
+
 export function postThot(dispatch, text, mindset_id) {
   dispatch({ type: LOADING });
   const data = [{ text: text, mindset: { id: mindset_id } }];

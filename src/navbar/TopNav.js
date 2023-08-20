@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import DropDown from "../components/DropDown";
 import { SET_REMINDER_TOGGLE } from "../pages/reminder/reducer";
+import dayjs from "dayjs";
 
 function TopNav(props) {
   const dispatch = store.dispatch;
@@ -16,6 +17,10 @@ function TopNav(props) {
   const navigate = useNavigate();
   const { thorg } = useParams();
   thorg && console.log("FROM THE TOPNAV", thorg);
+
+  //////// DAYJS ////////
+  const date = dayjs();
+
   //////// LOGOUT ////////
   const handleLogout = () => {
     localStorage.removeItem("refresh");
@@ -31,7 +36,7 @@ function TopNav(props) {
     },
     {
       action: () => handleLogout(),
-      icon: <i class="fa fa-sign-out" aria-hidden="true"></i>,
+      icon: <i class='fa fa-sign-out' aria-hidden='true'></i>,
     },
   ];
 
@@ -55,43 +60,76 @@ function TopNav(props) {
             {window.location.pathname === "/thorgs" ? (
               <>
                 <i
-                  className="fa fa-bell"
-                  aria-hidden="true"
+                  className='fa fa-bell'
+                  aria-hidden='true'
                   style={{ fontSize: "42px", cursor: "pointer" }}
                   onClick={() => navigate("/")}
                 ></i>
-                <h2 className="my-2">THORG</h2>
+                <h2
+                  style={{ cursor: "pointer" }}
+                  className='my-2'
+                  onClick={() => navigate("/day")}
+                >
+                  {date.format("dddd").toUpperCase()}
+                </h2>
               </>
             ) : window.location.pathname === "/" ? (
               <>
                 <i
-                  className="fa fa-bars"
-                  aria-hidden="true"
+                  className='fa fa-bars'
+                  aria-hidden='true'
                   style={{ fontSize: "42px", cursor: "pointer" }}
                   onClick={() => navigate("/thorgs")}
                 ></i>
-                <h2 className="my-2">REM</h2>
+                <h2
+                  style={{ cursor: "pointer" }}
+                  className='my-2'
+                  onClick={() => navigate("/day")}
+                >
+                  {date.format("dddd").toUpperCase()}
+                </h2>
+              </>
+            ) : window.location.pathname === "/day" ? (
+              <>
+                <i
+                  className='fa fa-bell'
+                  aria-hidden='true'
+                  style={{ fontSize: "42px", cursor: "pointer" }}
+                  onClick={() => navigate("/")}
+                ></i>
+                <h2
+                  style={{ cursor: "pointer" }}
+                  className='my-2'
+                  onClick={() => navigate("/day")}
+                >
+                  {date.format("dddd").toUpperCase()}
+                </h2>
               </>
             ) : window.location.pathname === "/thorgs/" + thorg ? (
               <>
                 <i
-                  className="fa fa-bars"
-                  aria-hidden="true"
+                  className='fa fa-bars'
+                  aria-hidden='true'
                   style={{ fontSize: "42px", cursor: "pointer" }}
                   onClick={() => navigate("/thorgs")}
                 ></i>
-                <h2 className="my-2">
-                  {thorg.replace(":", "").toLocaleUpperCase()}
+                <h2
+                  style={{ cursor: "pointer" }}
+                  className='my-2'
+                  onClick={() => navigate("/day")}
+                >
+                  {date.format("dddd").toUpperCase()}
                 </h2>
               </>
             ) : null}
+
             <DropDown
               //   direction={"dropleft"}
               dropIcon={
                 <i
                   style={{ fontSize: "42px", cursor: "pointer" }}
-                  class="fa fa-caret-square-o-down"
-                  aria-hidden="true"
+                  class='fa fa-caret-square-o-down'
+                  aria-hidden='true'
                 ></i>
               }
               dropList={dropList}
@@ -117,33 +155,65 @@ function TopNav(props) {
           {window.location.pathname === "/thorgs" ? (
             <>
               <i
-                className="fa fa-bell"
-                aria-hidden="true"
+                className='fa fa-bell'
+                aria-hidden='true'
                 style={{ fontSize: "42px", cursor: "pointer" }}
                 onClick={() => navigate("/")}
               ></i>
-              <h2 className="my-2">THORG</h2>
+              <h2
+                style={{ cursor: "pointer" }}
+                className='my-2'
+                onClick={() => navigate("/day")}
+              >
+                {date.format("dddd").toUpperCase()}
+              </h2>
             </>
           ) : window.location.pathname === "/" ? (
             <>
               <i
-                className="fa fa-bars"
-                aria-hidden="true"
+                className='fa fa-bars'
+                aria-hidden='true'
                 style={{ fontSize: "42px", cursor: "pointer" }}
                 onClick={() => navigate("/thorgs")}
               ></i>
-              <h2 className="my-2">REM</h2>
+              <h2
+                style={{ cursor: "pointer" }}
+                className='my-2'
+                onClick={() => navigate("/day")}
+              >
+                {date.format("dddd").toUpperCase()}
+              </h2>
+            </>
+          ) : window.location.pathname === "/day" ? (
+            <>
+              <i
+                className='fa fa-bell'
+                aria-hidden='true'
+                style={{ fontSize: "42px", cursor: "pointer" }}
+                onClick={() => navigate("/")}
+              ></i>
+              <h2
+                style={{ cursor: "pointer" }}
+                className='my-2'
+                onClick={() => navigate("/day")}
+              >
+                {date.format("dddd").toUpperCase()}
+              </h2>
             </>
           ) : window.location.pathname === "/thorgs/" + thorg ? (
             <>
               <i
-                className="fa fa-bars"
-                aria-hidden="true"
+                className='fa fa-bars'
+                aria-hidden='true'
                 style={{ fontSize: "42px", cursor: "pointer" }}
                 onClick={() => navigate("/thorgs")}
               ></i>
-              <h2 className="my-2">
-                {thorg.replace(":", "").toLocaleUpperCase()}
+              <h2
+                style={{ cursor: "pointer" }}
+                className='my-2'
+                onClick={() => navigate("/day")}
+              >
+                {date.format("dddd").toUpperCase()}
               </h2>
             </>
           ) : null}
@@ -152,8 +222,8 @@ function TopNav(props) {
             dropIcon={
               <i
                 style={{ fontSize: "42px", cursor: "pointer" }}
-                class="fa fa-caret-square-o-down"
-                aria-hidden="true"
+                class='fa fa-caret-square-o-down'
+                aria-hidden='true'
               ></i>
             }
             dropList={dropList}

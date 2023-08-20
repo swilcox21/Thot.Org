@@ -3,7 +3,7 @@ import "../../App.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import React, { useEffect, useRef, useState } from "react";
-import { putReminder, deleteReminder } from "../../actions/axios";
+import { putDaily, deleteDaily } from "../../actions/axios/day";
 import { SET_EDIT_TEXT, SET_SHOW_FULL } from "./reducer";
 import { store } from "../..";
 import BasicModal from "../../components/Modal";
@@ -11,7 +11,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { TextareaAutosize } from "@mui/material";
 
-function Reminder(props) {
+function Daily(props) {
   const dispatch = store.dispatch;
   //////// STATE ///////
   const [editText, setEditText] = useState("");
@@ -47,15 +47,15 @@ function Reminder(props) {
               )
             }
             header={null}
-            excerpt={`Are you sure you want to delete reminder #${props.id}`}
-            action={deleteReminder}
+            excerpt={`Are you sure you want to delete daily #${props.id}`}
+            action={deleteDaily}
             dblClick={true}
             click={() => {
               setShowFullHold(!showFullHold);
             }}
             actionButton={"DELETE"}
             dispatch={dispatch}
-            id={props.reminder.id}
+            id={props.daily.id}
             styles={{ minWidth: 30, fontSize: 18, color: "gray" }}
           />
         </div>
@@ -64,16 +64,14 @@ function Reminder(props) {
         <TextareaAutosize
           className='col-8 borderBottom mx-3 '
           type='text'
-          defaultValue={props.reminder.text}
+          defaultValue={props.daily.text}
           onChange={(e) => {
             setEditText(e.target.value);
           }}
           onFocus={() => setShowFull(true)}
           onBlur={() => {
             editText.length > 0 &&
-              putReminder(dispatch, [
-                { id: props.reminder.id, text: editText },
-              ]);
+              putDaily(dispatch, [{ id: props.daily.id, text: editText }]);
             setShowFull(false);
             setEditText("");
           }}
@@ -97,7 +95,7 @@ function Reminder(props) {
         <div
           {...attributes}
           {...listeners}
-          onDoubleClick={() => deleteReminder(dispatch, props.reminder.id)}
+          onDoubleClick={() => deleteDaily(dispatch, props.daily.id)}
           style={{
             // border: "1px solid gray",
             backgroundColor: "white",
@@ -110,9 +108,7 @@ function Reminder(props) {
             paddingLeft: "7px",
             paddingRight: "7px",
           }}
-        >
-          <i class='fa fa-hand-rock-o' aria-hidden='true'></i>
-        </div>
+        ></div>
 
         <br />
         <br />
@@ -121,7 +117,7 @@ function Reminder(props) {
   );
 }
 
-export default Reminder;
+export default Daily;
 // vercel
 
 ///////// DROP DOWN CODE ///////

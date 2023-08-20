@@ -9,6 +9,7 @@ const initialState = {
   dropTrigger: false,
   reminders: [],
   thorgs: [],
+  day: [],
   wrapperSize: {},
   contSize: {},
   footSize: {},
@@ -124,6 +125,48 @@ export default function reminderReducer(state = initialState, action) {
         loading: false,
       };
     }
+
+    // dailys
+    case DAILY_GET: {
+      console.log("DELTE_GET: ", action.dailys);
+      return {
+        ...state,
+        loading: false,
+        dailys: action.dailys,
+      };
+    }
+    case DAILY_POST: {
+      return {
+        ...state,
+        dailys: [...state.day.dailys, action.payload[0]],
+        loading: false,
+        text: "",
+        checked: false,
+      };
+    }
+    case DAILY_PUT: {
+      return {
+        ...state,
+        dailys: [
+          ...state.dailys.filter(
+            (reminder) => reminder.id !== action.payload.id
+          ),
+          action.payload,
+        ],
+        loading: false,
+        editText: "",
+      };
+    }
+    case DAILY_DELETE: {
+      console.log(action.payload);
+      return {
+        ...state,
+        dailys: state.dailys.filter(
+          (reminder) => reminder.id !== action.payload
+        ),
+        loading: false,
+      };
+    }
     // thorgs
     case THORG_GET: {
       console.log("DELTE_GET: ", action.thorgs);
@@ -161,7 +204,7 @@ export default function reminderReducer(state = initialState, action) {
         loading: false,
       };
     }
-    // thorgs
+    // thots
     case THORG_GET: {
       console.log("DELTE_GET: ", action.thots);
       return {
@@ -198,6 +241,24 @@ export default function reminderReducer(state = initialState, action) {
         loading: false,
       };
     }
+    // day
+    case DAY_GET: {
+      console.log("DAY_GET: ", action.day);
+      return {
+        ...state,
+        loading: false,
+        day: action.day,
+      };
+    }
+    case DAY_POST: {
+      return {
+        ...state,
+        thorgs: [...state.thorgs, action.payload[0]],
+        loading: false,
+        text: "",
+        checked: false,
+      };
+    }
     default:
       return state;
   }
@@ -219,6 +280,12 @@ export const REMINDER_GET = "reminder/reminderGet";
 export const REMINDER_POST = "reminder/reminderPost";
 export const REMINDER_PUT = "reminder/reminderPut";
 export const REMINDER_DELETE = "reminder/reminderDelete";
+export const DAILY_GET = "daily/dailyGet";
+export const DAILY_POST = "daily/dailyPost";
+export const DAILY_PUT = "daily/dailyPut";
+export const DAILY_DELETE = "daily/dailyDelete";
+export const DAY_GET = "day/dayGet";
+export const DAY_POST = "day/dayPost";
 export const THORG_GET = "thorg/thorgGet";
 export const THORG_POST = "thorg/thorgPost";
 export const THORG_PUT = "thorg/thorgPut";

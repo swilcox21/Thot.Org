@@ -19,16 +19,18 @@ import TopNav from "../navbar/TopNav";
 import Layout from "./Layout";
 import { store } from "..";
 import { getThorgs } from "../actions/axios";
+import Day from "../pages/day/Day";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
-      <Route path="*" element={<PageNotFound />} />
-      <Route path="/" element={<Reminders />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/thorgs">
+    <Route path='/' element={<Layout />}>
+      <Route path='*' element={<PageNotFound />} />
+      <Route path='/' element={<Reminders />} />
+      <Route path='/day' element={<Day />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/thorgs'>
         <Route index element={<Thorgs />} />
-        <Route path=":thorg" element={<Thots />} />
+        <Route path=':thorg' element={<Thots />} />
       </Route>
     </Route>
   )
