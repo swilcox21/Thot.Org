@@ -13,8 +13,8 @@ export const development = false;
 export const redirectURL = development
   ? "http://localhost:3000/"
   : "https://thotorg.app/";
-export const baseURL = "https://thorgapi.herokuapp.com";
-// export const baseURL = "https://thot-dot-org-e18f495798dc.herokuapp.com";
+// export const baseURL = "https://thorgapi.herokuapp.com";
+export const baseURL = "https://thot-dot-org-e18f495798dc.herokuapp.com";
 export const history = createBrowserHistory();
 
 //////// STORE ////////
