@@ -1,7 +1,7 @@
 import axios from "axios";
 import { baseURL, redirectURL } from "..";
 import { LOADING } from "../reducer";
-import { THORG_POST, THOT_POST } from "../pages/reminder/reducer";
+import { EDIT_TEXT_RESET, TEXT_RESET, THORG_POST, THOT_POST } from "../pages/reminder/reducer";
 import { THORG_GET, THOT_GET } from "../pages/reminder/reducer";
 import {
   REMINDER_GET,
@@ -184,6 +184,7 @@ export function postThorg(dispatch, name) {
           type: THORG_POST,
           payload: response.data,
         });
+        getThorgs(dispatch);
       });
   }
   thorgPost(data).catch((err) => {
@@ -293,10 +294,9 @@ export function postThot(dispatch, text, mindset_id) {
       })
       .then((response) => {
         console.log("THE POST:", response.data);
-        dispatch({
-          type: THORG_POST,
-          payload: response.data,
-        });
+        dispatch({ type: TEXT_RESET });
+        dispatch({ type: EDIT_TEXT_RESET });
+        getThorgs(dispatch);
       });
   }
   thotPost(data).catch((err) => {
@@ -341,12 +341,12 @@ export function putThot(dispatch, thot_id, text) {
   });
 }
 
-export function deleteThot(dispatch, thorg_id) {
+export function deleteThot(dispatch, mindset_id) {
   dispatch({ type: LOADING });
-  async function thotDelete(thorg_id) {
-    console.log("DELETE: ", thorg_id);
+  async function thotDelete(mindset_id) {
+    console.log("DELETE: ", mindset_id);
     await axios
-      .delete(`${baseURL}/thot/` + thorg_id, {
+      .delete(`${baseURL}/thot/` + mindset_id, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access")}`,
           "Content-Type": "application/json",
@@ -354,20 +354,20 @@ export function deleteThot(dispatch, thorg_id) {
       })
       .then((response) => {
         // window.location.reload();
-        console.log(thorg_id);
-        getThorgs(dispatch);
+        console.log(mindset_id);
+        getThots(dispatch, mindset_id);
         // dispatch({
-        //   type: THORG_DELETE,
-        //   payload: thorg_id,
+        //   type: mindset_DELETE,
+        //   payload: mindset_id,
         // });
       })
       .then((response) => {
         dispatch({ type: SET_DROP_TRIGGER, payload: true });
       });
   }
-  thotDelete(thorg_id).catch((err) => {
+  thotDelete(mindset_id).catch((err) => {
     refreshAccessToken().then(() => {
-      thotDelete(thorg_id).catch((err) => {
+      thotDelete(mindset_id).catch((err) => {
         alert("invalid DELETE request");
         console.log(err);
       });
