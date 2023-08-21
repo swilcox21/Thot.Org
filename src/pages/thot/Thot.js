@@ -29,9 +29,11 @@ function Thot(props) {
     <>
       <div
         style={{
-          width: "100%",
-          padding: "15px",
-          margin: "auto",
+          width: "423px",
+          padding: 0,
+          paddingTop: 20,
+          paddingBottom: 50,
+          marginLeft: -10,
         }}
       >
         <CodeMirror
@@ -41,6 +43,7 @@ function Thot(props) {
           extensions={[javascript({ jsx: true })]}
           onChange={onChange}
           onFocus={() => setShowFull(true)}
+          viewportMargin="infinity"
           onBlur={() => {
             editThot.length > 0 && putThot(dispatch, props.thot.id, editThot);
             setShowFull(false);
