@@ -26,6 +26,7 @@ import { Button } from "@mui/material";
 import dayjs from "dayjs";
 import { getDay } from "../../actions/axios/day";
 import Daily from "./daily";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Day(props) {
   const dispatch = store.dispatch;
@@ -36,7 +37,11 @@ function Day(props) {
   //////// STATE ///////
   const [dailys, setDailys] = useState();
   const [day_id, setDay_id] = useState();
+  const [isToday, setIsToday] = useState(1);
 
+  const { date } = useParams();
+
+  const navigate = useNavigate();
   //////// USEREF ////////
   const inputRef = useRef(null);
   const containerDivRef = useRef(null);
@@ -45,8 +50,8 @@ function Day(props) {
   //////// ONLOAD ////////
   useEffect(() => {
     console.log("INITIAL");
-    getDay(dispatch, dayjs().format("YYYY-MM-DD"));
-  }, []);
+    getDay(dispatch, date);
+  }, [date]);
   useEffect(() => {
     day.map((d) => {
       console.log("SECOND: ", d.dailys);
@@ -117,18 +122,37 @@ function Day(props) {
 
   return (
     <>
-      <div>
+      <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
+        <div
+          onClick={() => {
+            navigate(`/day/${dayjs().subtract(1, "day").format("YYYY-MM-DD")}`);
+          }}
+        >
+          <i class='fa fa-chevron-left' aria-hidden='true'></i>
+        </div>
         <Button
+          onClick={() => {
+            navigate(`/day/${dayjs().format("YYYY-MM-DD")}`);
+          }}
           sx={{
             border: "1px solid #555555",
             backgroundColor: "whitesmoke",
             color: "#555555",
-            margin: "1%",
-            minHeight: 64,
+            marginLeft: "3%",
+            marginRight: "3%",
+            minHeight: 34,
+            minWidth: 36,
           }}
         >
-          CAL
+          C
         </Button>
+        <div
+          onClick={() => {
+            navigate(`/day/${dayjs().add(1, "day").format("YYYY-MM-DD")}`);
+          }}
+        >
+          <i class='fa fa-chevron-right' aria-hidden='true'></i>
+        </div>
       </div>
       {day.length === 0 ? (
         <div
@@ -138,7 +162,7 @@ function Day(props) {
           }}
         >
           <Button
-            onClick={() => postDay(dispatch, dayjs().format("dddd"))}
+            onClick={() => postDay(dispatch, dayjs().format("dddd"), date)}
             sx={{
               border: "1px solid #555555",
               backgroundColor: "whitesmoke",

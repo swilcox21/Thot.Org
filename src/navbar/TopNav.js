@@ -19,7 +19,8 @@ function TopNav(props) {
   thorg && console.log("FROM THE TOPNAV", thorg);
 
   //////// DAYJS ////////
-  const date = dayjs();
+  const { date } = useParams();
+  const currentDate = dayjs(date);
 
   //////// LOGOUT ////////
   const handleLogout = () => {
@@ -68,9 +69,11 @@ function TopNav(props) {
                 <h2
                   style={{ cursor: "pointer" }}
                   className='my-2'
-                  onClick={() => navigate("/day")}
+                  onClick={() =>
+                    navigate(`/day${dayjs().format("YYYY-MM-DD")}`)
+                  }
                 >
-                  {date.format("dddd").toUpperCase()}
+                  {currentDate.format("dddd").toUpperCase()}
                 </h2>
               </>
             ) : window.location.pathname === "/" ? (
@@ -84,9 +87,11 @@ function TopNav(props) {
                 <h2
                   style={{ cursor: "pointer" }}
                   className='my-2'
-                  onClick={() => navigate("/day")}
+                  onClick={() =>
+                    navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)
+                  }
                 >
-                  {date.format("dddd").toUpperCase()}
+                  {currentDate.format("dddd").toUpperCase()}
                 </h2>
               </>
             ) : window.location.pathname === "/day" ? (
@@ -100,9 +105,11 @@ function TopNav(props) {
                 <h2
                   style={{ cursor: "pointer" }}
                   className='my-2'
-                  onClick={() => navigate("/day")}
+                  onClick={() =>
+                    navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)
+                  }
                 >
-                  {date.format("dddd").toUpperCase()}
+                  {currentDate.format("dddd").toUpperCase()}
                 </h2>
               </>
             ) : window.location.pathname === "/thorgs/" + thorg ? (
@@ -116,12 +123,32 @@ function TopNav(props) {
                 <h2
                   style={{ cursor: "pointer" }}
                   className='my-2'
-                  onClick={() => navigate("/day")}
+                  onClick={() =>
+                    navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)
+                  }
                 >
-                  {date.format("dddd").toUpperCase()}
+                  {currentDate.format("dddd").toUpperCase()}
                 </h2>
               </>
-            ) : null}
+            ) : (
+              <>
+                <i
+                  className='fa fa-bell'
+                  aria-hidden='true'
+                  style={{ fontSize: "42px", cursor: "pointer" }}
+                  onClick={() => navigate("/")}
+                ></i>
+                <h2
+                  style={{ cursor: "pointer" }}
+                  className='my-2'
+                  onClick={() =>
+                    navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)
+                  }
+                >
+                  {currentDate.format("dddd").toUpperCase()}
+                </h2>
+              </>
+            )}
 
             <DropDown
               //   direction={"dropleft"}
@@ -163,9 +190,9 @@ function TopNav(props) {
               <h2
                 style={{ cursor: "pointer" }}
                 className='my-2'
-                onClick={() => navigate("/day")}
+                onClick={() => navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)}
               >
-                {date.format("dddd").toUpperCase()}
+                {currentDate.format("dddd").toUpperCase()}
               </h2>
             </>
           ) : window.location.pathname === "/" ? (
@@ -179,9 +206,9 @@ function TopNav(props) {
               <h2
                 style={{ cursor: "pointer" }}
                 className='my-2'
-                onClick={() => navigate("/day")}
+                onClick={() => navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)}
               >
-                {date.format("dddd").toUpperCase()}
+                {currentDate.format("dddd").toUpperCase()}
               </h2>
             </>
           ) : window.location.pathname === "/day" ? (
@@ -195,9 +222,9 @@ function TopNav(props) {
               <h2
                 style={{ cursor: "pointer" }}
                 className='my-2'
-                onClick={() => navigate("/day")}
+                onClick={() => navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)}
               >
-                {date.format("dddd").toUpperCase()}
+                {currentDate.format("dddd").toUpperCase()}
               </h2>
             </>
           ) : window.location.pathname === "/thorgs/" + thorg ? (
@@ -211,12 +238,28 @@ function TopNav(props) {
               <h2
                 style={{ cursor: "pointer" }}
                 className='my-2'
-                onClick={() => navigate("/day")}
+                onClick={() => navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)}
               >
-                {date.format("dddd").toUpperCase()}
+                {currentDate.format("dddd").toUpperCase()}
               </h2>
             </>
-          ) : null}
+          ) : (
+            <>
+              <i
+                className='fa fa-bell'
+                aria-hidden='true'
+                style={{ fontSize: "42px", cursor: "pointer" }}
+                onClick={() => navigate("/")}
+              ></i>
+              <h2
+                style={{ cursor: "pointer" }}
+                className='my-2'
+                onClick={() => navigate(`/day/${dayjs().format("YYYY-MM-DD")}`)}
+              >
+                {currentDate.format("dddd").toUpperCase()}
+              </h2>
+            </>
+          )}
           <DropDown
             //   direction={"dropleft"}
             dropIcon={

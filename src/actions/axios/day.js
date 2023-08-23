@@ -1,7 +1,13 @@
 import axios from "axios";
 import { baseURL, redirectURL } from "../..";
 import { LOADING } from "../../reducer";
-import { DAY_GET, DAY_POST, SET_TEXT, TEXT_RESET, THORG_POST } from "../../pages/reminder/reducer";
+import {
+  DAY_GET,
+  DAY_POST,
+  SET_TEXT,
+  TEXT_RESET,
+  THORG_POST,
+} from "../../pages/reminder/reducer";
 import { refreshAccessToken } from "../axios";
 import {
   DAILY_GET,
@@ -36,9 +42,9 @@ export function getDay(dispatch, date) {
   });
 }
 
-export function postDay(dispatch, name) {
+export function postDay(dispatch, name, created_date) {
   dispatch({ type: LOADING });
-  const data = [{ name: name }];
+  const data = [{ name: name, created_date: created_date }];
   async function dayPost(data) {
     await axios
       .post(`${baseURL}/day/`, data, {
@@ -102,9 +108,9 @@ export function postDaily(dispatch, text, day_id) {
       })
       .then((response) => {
         console.log("THE POST:", response.data);
-        getDay(dispatch, dayjs().format('YYYY-MM-DD'));
+        getDay(dispatch, dayjs().format("YYYY-MM-DD"));
         dispatch({
-          type: TEXT_RESET
+          type: TEXT_RESET,
         });
       });
   }
@@ -129,7 +135,7 @@ export function putDaily(dispatch, data) {
         },
       })
       .then((response) => {
-        getDay(dispatch, dayjs().format('YYYY-MM-DD'));
+        getDay(dispatch, dayjs().format("YYYY-MM-DD"));
         dispatch({ type: SET_EDIT_TEXT, editText: "" });
       });
   }
@@ -158,8 +164,7 @@ export function deleteDaily(dispatch, daily_id) {
       .then((response) => {
         // window.location.reload();
         console.log(daily_id);
-        getDay(dispatch, dayjs().format('YYYY-MM-DD'));
-
+        getDay(dispatch, dayjs().format("YYYY-MM-DD"));
       })
       .then((response) => {
         dispatch({ type: SET_DROP_TRIGGER, payload: true });

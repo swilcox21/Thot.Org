@@ -26,8 +26,11 @@ const router = createBrowserRouter(
     <Route path='/' element={<Layout />}>
       <Route path='*' element={<PageNotFound />} />
       <Route path='/' element={<Reminders />} />
-      <Route path='/day' element={<Day />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/day'>
+        <Route index element={<Day />} />
+        <Route path=':date' element={<Day />} />
+      </Route>
       <Route path='/thorgs'>
         <Route index element={<Thorgs />} />
         <Route path=':thorg' element={<Thots />} />
